@@ -1,0 +1,300 @@
+<div class="main-wrapper-holder">
+  <div class="main-wrapper">
+    <div class="top-of-layout" header></div>
+    <div class="content-of-layout">
+      <div class="content-wr">
+        <div class="content-wr-left active" id="nav">
+          <!--add remove class active -->
+          <div class="content-wr-left-ow">
+            <div class="icon-d-open" ng-click="vm.toggleNavBar()"><i class="bc-icon-chevron-small-left"></i></div>
+            <div class="content-wr-left-wr">
+              <div class="content-wr-left-gr">
+                <div class="content-wr-left-gr-top">
+                  <div class="content-wr-left-gr-top-in">
+                    <div class="d-filters">
+                      <p class="p-filt">Filters</p>
+                      <span class="refr-ic-d" ng-click="vm.resetFilter()"><i class="bc-icon-icon-refresh"></i></span>
+                    </div>
+                    <div class="d-left-search">
+                      <input
+                        type="text"
+                        placeholder="Search"
+                        class="inp-s"
+                        ng-model="vm.searchText"
+                        ng-keypress="vm.enter($event)"
+                      />
+                      <span class="ic-sp-search" ng-click="vm.search()"><i class="bc-icon-icon-search"></i></span>
+                    </div>
+                    <div class="d-unc-fl">
+                      <div
+                        class="unc-inl-fl"
+                        ng-repeat="item in vm.selectedFilter.statuses
+                      .concat(vm.selectedFilter.leagues)
+                      .concat(vm.selectedFilter.teams)
+                      .concat(vm.selectedFilter.countries)"
+                      >
+                        <p class="unc-t">{{item.title}}</p>
+                        <span class="inc-ic-d" ng-click="vm.removeFilterItem(item)"
+                          ><i class="bc-icon-icon-close"></i
+                        ></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="content-wr-left-gr-middle">
+                  <div class="left-gr-m-ins">
+                    <div class="left-gr-m-c">
+                      <div class="scroll-content">
+                        <div class="match-st-d">
+                          <div class="d-match-st-wr">
+                            <div class="d-match-st-con" ng-click="vm.toggleFilterMenu($event)">
+                              <p class="match-title">Match Status</p>
+                              <span class="match-ic-d"><i class="bc-icon-keyboard_arrow_down"></i></span>
+                            </div>
+                            <div class="d-match-open">
+                              <div class="d-match-open-content">
+                                <!--                                <div class="all-matches-d">-->
+                                <!--                                  <p class="all-m-title">All Matches</p>-->
+                                <!--                                  <div class="all-match-ic-d">-->
+                                <!--                                    <span class="all-match-ic-sp">-->
+                                <!--                                      <i class="bc-icon-circle-check"></i>-->
+                                <!--                                    </span>-->
+                                <!--                                  </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="all-matches-d active-check">-->
+                                <!--                                  <p class="all-m-title">All Matches</p>-->
+                                <!--                                  <div class="all-match-ic-d">-->
+                                <!--                                    <span class="all-match-ic-sp">-->
+                                <!--                                      <i class="bc-icon-circle-check"></i>-->
+                                <!--                                    </span>-->
+                                <!--                                  </div>-->
+                                <!--                                </div>-->
+                                <div
+                                  ng-repeat="status in vm.filterItems.statuses"
+                                  class="all-matches-d tooltip
+                                    {{vm.selectedFilter.statuses.includes(status) ? 'active-plus': ''}}"
+                                  ng-click="vm.filterByItem(status, 'statuses')"
+                                >
+                                  <div class="tooltip-wr">
+                                    <p class="tool-p">{{status.title}}</p>
+                                  </div>
+                                  <div class="live-c-d {{status.title.toLowerCase()}}"></div>
+                                  <p class="all-m-title">{{status.title}}</p>
+                                  <div class="all-match-ic-d">
+                                    <span class="all-match-ic-sp">
+                                      <i class="bc-icon-circle-plus"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="d-match-st-wr">
+                            <div class="d-match-st-con" ng-click="vm.toggleFilterMenu($event)">
+                              <p class="match-title">Country</p>
+                              <span class="match-ic-d"><i class="bc-icon-keyboard_arrow_down"></i></span>
+                            </div>
+                            <div class="d-match-open">
+                              <div
+                                ng-repeat="country in vm.filterItems.countries"
+                                class="d-match-open-content"
+                                ng-click="vm.filterByItem(country, 'countries')"
+                              >
+                                <div
+                                  class="all-matches-d {{vm.selectedFilter.countries.includes(country) ? 'active-plus': ''}}"
+                                >
+                                  <p class="all-m-title">{{country.title}}</p>
+                                  <div class="all-match-ic-d">
+                                    <span class="all-match-ic-sp">
+                                      <i class="bc-icon-circle-plus"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="d-match-st-wr">
+                            <div class="d-match-st-con" ng-click="vm.toggleFilterMenu($event)">
+                              <p class="match-title">Leagues</p>
+                              <span class="match-ic-d"><i class="bc-icon-keyboard_arrow_down"></i></span>
+                            </div>
+                            <div class="d-match-open">
+                              <div
+                                class="d-match-open-content"
+                                ng-repeat="league in vm.filterItems.leagues"
+                                ng-click="vm.filterByItem(league, 'leagues')"
+                              >
+                                <div
+                                  class="all-matches-d {{vm.selectedFilter.leagues.includes(league) ? 'active-plus': ''}}"
+                                >
+                                  <p class="all-m-title">{{league.title}}</p>
+                                  <div class="all-match-ic-d">
+                                    <span class="all-match-ic-sp">
+                                      <i class="bc-icon-circle-plus"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="d-match-st-wr">
+                            <div class="d-match-st-con" ng-click="vm.toggleFilterMenu($event)">
+                              <p class="match-title">Teams</p>
+                              <span class="match-ic-d"><i class="bc-icon-keyboard_arrow_down"></i></span>
+                            </div>
+                            <div class="d-match-open">
+                              <div
+                                class="d-match-open-content"
+                                ng-repeat="team in vm.filterItems.teams"
+                                ng-click="vm.filterByItem(team, 'teams')"
+                              >
+                                <div
+                                  class="all-matches-d {{vm.selectedFilter.teams.includes(team) ? 'active-plus': ''}}"
+                                >
+                                  <p class="all-m-title">{{team.title}}</p>
+                                  <div class="all-match-ic-d">
+                                    <span class="all-match-ic-sp">
+                                      <i class="bc-icon-circle-plus"></i>
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="content-wr-left-gr-bottom">
+                  <div class="gr-b-feedconstruct">
+                    <div class="gr-b-f">
+                      <div class="gr-b-f-fl">
+                        <div class="gr-b-f-fl-left">
+                          <span class="f-fl-left-sp"><i class="bc-icon-copyright"></i></span>
+                        </div>
+                        <div class="gr-b-f-fl-right">2020 Feedconstruct. All rights reserved</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-wr-right">
+          <div class="content-wr-right-gr">
+            <div class="no-result-wr" ng-if="!vm.games.length && vm.dataIsReceived">
+              <div class="no-result-content">
+                <div class="no-result-img">
+                  <img src="./assets/images/No_Result_Found.svg" alt="" />
+                </div>
+                <p class="no-res-p">No Result Found</p>
+                <p class="no-res-change-p">Try changing the filters or search term.</p>
+                <div class="btn-reset-d">
+                  <button class="btn-filter" ng-click="vm.resetFilter()">Reset Filters</button>
+                </div>
+              </div>
+            </div>
+            <div class="content-wr-right-gr-top">
+              <div class="r-match-title-wr">
+                <div class="r-match-title-row">
+                  <div class="r-match-title-row-col" ng-repeat="item in vm.sortItemLabel">
+                    <!--                    <div class="r-match-title-row-col-l"></div>-->
+                    <div class="title-r-fl up down" ng-click="vm.sort($event, item)" id="item_{{$index}}">
+                      <!--add remove class up,down-->
+                      <p class="title-r-fl-p">{{item.title}}</p>
+                      <div class="t-match-ic-d">
+                        <span class="bc-icon-arrow_drop_down"> </span>
+                        <span class="bc-icon-arrow_drop_top"> </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="content-wr-right-gr-bottom">
+              <div class="con-r-inside">
+                <div class="con-r-ins-c">
+                  <div class="scroll-content">
+                    <div class="right-match-wr">
+                      <div
+                        ng-repeat="game in vm.games"
+                        ng-class="'right-match-row border-' + vm.classByStatus[game.status]"
+                      >
+                        <div class="right-match-row-left">
+                          <div class="right-match-row-ins">
+                            <div class="row-ic-bask"><i class="bc-icon-icon-sports_basketball"></i></div>
+                            <p class="row-m-t">ID {{game.id}}</p>
+                          </div>
+                          <div class="right-match-row-ins">
+                            <p class="row-m-t">{{game.country}}</p>
+                          </div>
+                          <div class="right-match-row-ins">
+                            <p class="row-m-t">{{game.league}}</p>
+                          </div>
+                          <div class="right-match-row-ins">
+                            <p class="row-m-t">{{game.home_team}}</p>
+                          </div>
+                          <div class="right-match-row-ins">
+                            <p class="row-m-t">{{game.away_team}}</p>
+                          </div>
+                          <div class="right-match-row-ins">
+                            <p class="row-m-t right">{{game.start_time | date:'dd/MM/yyyy, HH:mm'}}</p>
+                          </div>
+                        </div>
+                        <div class="right-match-row-btn">
+                          <div class="match-d-ic" ng-click="vm.goToReportPage(game.id)">
+                            <i class="bc-icon-icon-setting" ng-if="game.status == 0 || game.status == 1"></i>
+                            <i class="bc-icon-description" ng-if="!(game.status == 0 || game.status == 1)"></i>
+                          </div>
+                          <div class="match-r-btn-d">
+                            <button class="btn-start" ng-class="'btn-start ' + (game.status == 11 ? 'disabled' :'')" ng-click="vm.startGame(game)">start</button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- add remove class border-up -->
+                      <!--                      <div class="right-match-row border-up">-->
+                      <!--                        <div class="right-match-row-left">-->
+                      <!--                          <div class="right-match-row-ins">-->
+                      <!--                            <div class="row-ic-bask"><i class="bc-icon-icon-sports_basketball"></i></div>-->
+                      <!--                            <p class="row-m-t">ID 523695</p>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="right-match-row-ins">-->
+                      <!--                            <p class="row-m-t">Armenia</p>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="right-match-row-ins">-->
+                      <!--                            <p class="row-m-t">Vbet League A</p>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="right-match-row-ins">-->
+                      <!--                            <p class="row-m-t">Urartu VBet</p>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="right-match-row-ins">-->
+                      <!--                            <p class="row-m-t">Aragats BC</p>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="right-match-row-ins">-->
+                      <!--                            <p class="row-m-t right">20/05/2020, 12:05</p>-->
+                      <!--                          </div>-->
+                      <!--                        </div>-->
+                      <!--                        <div class="right-match-row-btn">-->
+                      <!--                          <div class="match-d-ic mess">-->
+                      <!--                            &lt;!&ndash; add remove class mess &ndash;&gt;-->
+                      <!--                            <i class="bc-icon-icon-setting"></i>-->
+                      <!--                          </div>-->
+                      <!--                          <div class="match-r-btn-d">-->
+                      <!--                            <button class="btn-start">start</button>-->
+                      <!--                          </div>-->
+                      <!--                        </div>-->
+                      <!--                      </div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

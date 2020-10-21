@@ -1,0 +1,211 @@
+<div class="main-wrapper">
+  <div class="header" ng-include="'./src/app/components/layouts/header_nav.html'"></div>
+  <div class="container-fluid">
+    <div class="team-edit-wr">
+      <div class="loading-wrapper" ng-include="'./src/app/components/layouts/loading.html'" ng-show="vm.loading"></div>
+      <div class="for-team-edit-filter">
+        <div class="team-edit-filter">
+          <div class="team-edit-filter-item">
+            <button class="team-player-add" type="button" ng-click="vm.openModal()"><span>add player</span></button>
+          </div>
+          <div class="team-edit-filter-item">
+            <p class="team-name-in-filter">{{vm.selectedTeam.team_name}}</p>
+          </div>
+          <div class="team-edit-filter-item">
+            <div class="team-edit-row">
+              <input class="filter-item-inp" placeholder="Search" ng-model="vm.searchText" />
+              <span class="bc-i-search search-icon" ng-click="vm.search()"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="for-team-edit-table">
+        <div class="for-team-edit-table-wr">
+          <div class="team-edit-table-wr">
+            <div class="left-t-edit-container">
+              <div class="inside-l-t-edit-container">
+                <div class="scrollable-container">
+                  <div class="teams-name-block">
+                    <select
+                      class="teams-league-s"
+                      name="league"
+                      ng-change="vm.selectLeague()"
+                      ng-model="vm.selectedLeagueId"
+                    >
+                      <option ng-repeat="league in vm.leagues" ng-value="league.id">{{league.name}}</option>
+                    </select>
+                    <h3 class="t-n-block-title">teams</h3>
+                    <p
+                      class="t-n-block-item"
+                      ng-repeat="team in vm.teams"
+                      ng-class="vm.selectedTeam.team_id === team.team_id ? 'active' : ''"
+                      ng-click="vm.selectTeam(team)"
+                    >
+                      {{team.team_name}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="right-t-edit-container">
+              <div class="inside-r-t-edit-container">
+                <div class="scrollable-container">
+                  <div class="team-edit-table-head">
+                    <div class="t-item-h">
+                      <span class="t-item-h-sp">#</span>
+                    </div>
+                    <div
+                      class="t-item-h"
+                      ng-repeat="item in vm.sortItems"
+                      ng-class="vm.selectedItem.key === item.key && vm.selectedItem.sortClass"
+                      ng-click="vm.sortItemsByKey(item.key)"
+                    >
+                      <span class="t-item-h-sp">{{item.title}}</span>
+                      <div class="t-i-h-icon-block">
+                        <span class="bc-i-caret-up up-icon"></span>
+                        <span class="bc-i-caret-down down-icon"></span>
+                      </div>
+                    </div>
+                    <div class="t-item-h"></div>
+                  </div>
+                  <div class="team-edit-table">
+                    <div class="team-edit-table-row" ng-repeat="(index, player) in vm.selectedTeamPlayers">
+                      <div class="team-edit-item"><span class="team-edit-spn">{{index + 1}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.first_name}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.last_name}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.shirt_number}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.position_name}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.age}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.height}}</span></div>
+                      <div class="team-edit-item"><span class="team-edit-spn">{{player.weight}}</span></div>
+                      <div class="team-edit-item">
+                        <button
+                          class="for-team-btn edit"
+                          title="edit"
+                          type="button"
+                          ng-click="vm.openEditModal(player)"
+                        >
+                          edit
+                        </button>
+                        <button
+                          class="for-team-btn delete"
+                          title="delete"
+                          type="button"
+                          ng-click="vm.playerDelete(player.id)"
+                        >
+                          delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-wr" ng-show="vm.addOrEditModal">
+    <div class="inside-popup-wr">
+      <div class="scrollable-container">
+        <div class="for-add-container">
+          <p class="popup-team-name">{{vm.selectedTeam.team_name}}</p>
+          <form form-validation-directive="vm.addOrEditPlayer()" novalidate>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <input class="add-item" placeholder="First Name" name="first_name" ng-model="vm.userModel.first_name" />
+              </div>
+            </div>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <input class="add-item" placeholder="Last Name" name="last_name" ng-model="vm.userModel.last_name" />
+              </div>
+            </div>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <input
+                  class="add-item"
+                  type="text"
+                  placeholder="Shirt Number"
+                  name="shirt_number"
+                  ng-model="vm.userModel.shirt_number"
+                />
+              </div>
+            </div>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <select class="add-item point" ng-model="vm.userModel.position_id" name="position">
+                  <option ng-repeat="position in vm.positions" ng-value="position.id">{{position.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <input
+                  class="add-item point"
+                  type="date"
+                  placeholder="yyyy-dd-mm"
+                  name="birthday"
+                  ng-model="vm.userModel.birthday"
+                />
+              </div>
+            </div>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <input
+                  class="add-item"
+                  type="number"
+                  placeholder="Height"
+                  name="height"
+                  ng-model="vm.userModel.height"
+                />
+              </div>
+            </div>
+            <div class="for-add-item">
+              <div class="inside-for-add-item">
+                <input
+                  class="add-item"
+                  type="number"
+                  placeholder="Weight"
+                  name="weight"
+                  ng-model="vm.userModel.weight"
+                />
+              </div>
+            </div>
+            <div class="image-add-block">
+              <div class="inside-image-add-b" ng-show="vm.userModel.image && !vm.picFile">
+                <img src="{{vm.playerImgBasePath + vm.userModel.id + '.jpg?q=' + vm.tokenForImg}}" />
+              </div>
+              <div class="inside-image-add-b">
+                <button class="choose-btn" ngf-select ng-model="vm.picFile" accept="image/*">
+                  Select Player Photo
+                </button>
+              </div>
+            </div>
+            <div class="image-crop cropArea" ngf-drop ng-model="vm.picFile" ngf-pattern="image/*">
+              <img-crop
+                image="vm.picFile  | ngfDataUrl"
+                area-type="square"
+                result-image="vm.userModel.image"
+                area-min-size="40"
+                class="img-crop-element"
+              ></img-crop>
+            </div>
+            <div class="btn-add-block">
+              <div class="inside-btn-add-block">
+                <button class="for-add-btn edit" title="save" type="submit">save</button>
+              </div>
+              <div class="inside-btn-add-block">
+                <button class="for-add-btn delete" title="cancel" type="reset" ng-click="vm.closeModal()">
+                  cancel
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="header-wrapper">
+  <div ng-if="disconnect" class="connection-box">Connection failed. Please do not Refresh page !!!</div>
+  <div class="header-navigation">
+    <div class="header-nav-left">
+      <a class="logo-target" href="#">
+        <img src="../../assets/img/logo_feedconstruct_white.png" alt="" />
+      </a>
+    </div>
+    <div class="header-nav-small">
+      <div class="headphone" ng-class="{'animChatDivBg': isUnreadMessages}">
+        <img ng-class="{'animChatImg': isUnreadMessages}" src="./assets/img/headphone.png" />
+      </div>
+    </div>
+    <div class="header-nav-right">
+      <a
+        class="header-nav-right-item"
+        ng-show="currentPath === '/game/{{game_id}}'"
+        href="/#!/statisticsTable/{{game_id}}"
+      >
+        <button class="printBtn">Statistics</button>
+      </a>
+      <a class="header-nav-right-item" ng-repeat="item in topMenu" ng-href="{{item.href}}">{{item.name}}</a>
+      <div class="header-nav-right-item" ng-click="logout()">Log Out</div>
+      <time class="time-item"></time>
+    </div>
+  </div>
+</div>

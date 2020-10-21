@@ -1,0 +1,41 @@
+<div class="top-of-l-fl">
+  <div class="top-of-l-fl-logo" ng-click="goToMatchList()">
+    <div class="l-fl-logo-img"><img src="./assets/images/logo.png" alt="" /></div>
+  </div>
+  <div class="top-of-l-fl-menu">
+    <a class="l-fl-menu-a active" ng-click="goToMatchList()">Match List</a>
+    <a class="l-fl-menu-a">Stats</a>
+    <a class="l-fl-menu-a">About</a>
+    <a class="l-fl-menu-a">Contact Us</a>
+  </div>
+  <div class="top-of-l-av">
+    <div class="top-of-l-av-con" ng-click="toggleClassName($event)">
+      <!--add remove class active-->
+      <i class="bc-icon-icon-avatar"></i>
+      <span class="top-of-l-log-c">
+        <i class="bc-icon-arrow_drop_top"></i>
+      </span>
+    </div>
+    <div class="top-of-logout">
+      <div class="top-of-logout-con">
+        <div class="top-of-logout-con-ins">
+          <p class="p-logout-name">Name</p>
+          <div class="fl-light-c">
+            <div class="fl-light-c-l">Light</div>
+            <div class="fl-light-c-r">
+              <div class="theme-check" ng-click="toggleClassName($event, 'dark')">
+                <span class="theme-check-light">
+                  <i class="bc-icon-icon-light"></i><i class="bc-icon-icon-dark"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="d-logout" ng-click="logout()">
+            <p class="p-logout">Log Out</p>
+            <span class="logout-d-icon"><i class="bc-icon-icon-login"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

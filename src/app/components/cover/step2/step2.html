@@ -1,0 +1,339 @@
+<div class="scroll-content">
+  <div class="cov-page-midd-ins">
+    <div class="cov-page-midd-ins-left">
+      <div class="cover-page-team">
+        <div class="cover-page-team-left">
+          <div class="cover-page-team-logo">
+            <img
+              ng-if="preGameData"
+              src="{{'https://statistics.betcoapps.com/images/e/m/' + preGameData.home_team.team_logo}}"
+            />
+          </div>
+        </div>
+        <div class="cover-page-team-right">
+          <div class="cover-page-team-right-con">
+            <div class="cover-page-team-right-con-top">
+              <div class="cov-p-name-team">
+                <p class="p-name-team-cov">{{preGameData.game.home_team}}</p>
+                <p class="p-name-t-cov">Team Color</p>
+              </div>
+            </div>
+            <div class="cover-page-team-right-con-bottom" id="homeColorPickerSection">
+              <div class="cov-page-team-shirt">
+                <div class="cov-page-team-shirt-item green-icon">
+                  <i class="bc-icon-shirt" ng-style="{color: preGameData.game_data.home_team_kit || '#fff'}"></i>
+                </div>
+                <div class="cov-page-team-shirt-item active" id="homeColorPicker">
+                  <div class="cov-page-team-shirt-item-sp">
+                    <i class="bc-icon-color"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                name="home_coach"
+                ng-model="coach.homeCoach.selectedValue"
+                ng-focus="choseCoach($event)"
+                ng-blur="choseCoach($event)"
+                ng-change="change('homeCoach')"
+              />
+              <label class="venue-lab">Coach Name</label>
+              <div class="open-ven-wr" ng-if="preGameData.homeCoach.length || coach.homeCoach.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.homeCoach"
+                        ng-click="selectOption(item, 'homeCoach')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div class="d-add-coach" ng-if="!preGameData.homeCoach.length && coach.homeCoach.setCustomValue" ng-click="addOption('homeCoach')">
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{coach.homeCoach.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{coachCountry.home_coach.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'home_coach')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                ng-model="coach.homeAssistant.selectedValue"
+                ng-focus="choseCoach($event)"
+                ng-blur="choseCoach($event)"
+                ng-change="change('homeAssistant')"
+              />
+              <label class="venue-lab">Associated Coach</label>
+              <div class="open-ven-wr" ng-if="preGameData.homeAssistant.length || coach.homeAssistant.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.homeAssistant"
+                        ng-click="selectOption(item, 'homeAssistant')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.homeAssistant.length && coach.homeAssistant.setCustomValue"
+                        ng-click="addOption('homeAssistant')"
+                      >
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{coach.homeAssistant.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{coachCountry.home_coach_assistant.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'home_coach_assistant')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cov-page-midd-ins-right">
+      <div class="cover-page-team">
+        <div class="cover-page-team-left">
+          <div class="cover-page-team-logo">
+            <img
+              ng-if="preGameData"
+              src="{{'https://statistics.betcoapps.com/images/e/m/' + preGameData.away_team.team_logo}}"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="cover-page-team-right">
+          <div class="cover-page-team-right-con">
+            <div class="cover-page-team-right-con-top">
+              <div class="cov-p-name-team">
+                <p class="p-name-team-cov">{{preGameData.game.away_team}}</p>
+                <p class="p-name-t-cov">Team Color</p>
+              </div>
+            </div>
+            <div class="cover-page-team-right-con-bottom" id="awayColorPickerSection">
+              <div class="cov-page-team-shirt">
+                <div class="cov-page-team-shirt-item yellow-icon">
+                  <i class="bc-icon-shirt" ng-style="{color: preGameData.game_data.away_team_kit || '#fff'}"></i>
+                </div>
+                <div class="cov-page-team-shirt-item" id="awayColorPicker">
+                  <div class="cov-page-team-shirt-item-sp">
+                    <i class="bc-icon-color"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                name="away_coach"
+                ng-model="coach.awayCoach.selectedValue"
+                ng-focus="choseCoach($event)"
+                ng-blur="choseCoach($event)"
+                ng-change="change('awayCoach')"
+              />
+              <label class="venue-lab">Coach Name</label>
+              <div class="open-ven-wr" ng-if="preGameData.awayCoach.length || coach.awayCoach.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.awayCoach"
+                        ng-click="selectOption(item, 'awayCoach')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div class="d-add-coach" ng-if="!preGameData.awayCoach.length && coach.awayCoach.setCustomValue" ng-click="addOption('awayCoach')">
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{coach.awayCoach.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{coachCountry.away_coach.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'away_coach')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                ng-model="coach.awayAssistant.selectedValue"
+                ng-focus="choseCoach($event)"
+                ng-blur="choseCoach($event)"
+                ng-change="change('awayAssistant')"
+              />
+              <label class="venue-lab">Associated Coach</label>
+              <div class="open-ven-wr" ng-if="preGameData.awayAssistant.length || coach.awayAssistant.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.awayAssistant"
+                        ng-click="selectOption(item, 'awayAssistant')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.awayAssistant.length && coach.awayAssistant.setCustomValue"
+                        ng-click="addOption('awayAssistant')"
+                      >
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{coach.awayAssistant.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{coachCountry.away_coach_assistant.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'away_coach_assistant')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

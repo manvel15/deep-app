@@ -1,0 +1,72 @@
+<div class="event-detail-wrapper">
+  <!--<h2>FOUL {{team[action.team]}}</h2>-->
+  <div class="event-detail-left">
+    <div class="event-type-wrapper">
+      <div class="scroll-content event-type-center">
+        <div class="close-area" ng-click="closeArea();undoEvent(Code.Foul,action.team, lastSentEventId)"></div>
+        <div class="event-types" ng-init="action.type = 'Personal'">
+          <h3 class="">Select Type</h3>
+          <div class="confirm-wrapper" ng-repeat="(key, value) in FoulsCheck()">
+            <label>
+              <input
+                type="radio"
+                name="type"
+                ng-click="setEventDetail($event, 'type', value)"
+                ng-checked="value == 'Personal'"
+              />
+              <span class="event_type">{{value}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="event-detail-right">
+    <div class="event-detail-players">
+      <div>
+        <h3>Select Player</h3>
+        <div class="starting-players confirm-wrapper">
+          <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
+            <input type="radio" name="player" ng-click="setEventDetail($event, 'player_id', p)" />
+            <div class="team-player">
+              <span>{{playersShirtNumber[p]}}</span>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div>
+        <h3 ng-if="!DoubleFoul">Select Opponent</h3>
+        <h3 ng-if="DoubleFoul">Select Player</h3>
+        <div class="starting-players confirm-wrapper">
+          <label ng-repeat="p in action.team == 1 ? playersAway.starting : playersHome.starting">
+            <input type="radio" name="assistant" ng-click="setEventDetail($event, 'assistant_id', p)" />
+            <div class="team-player">
+              <span>{{playersShirtNumber[p]}}</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="event-detail-players" ng-hide="checkProperties.isChecked">
+      <h3>Will there be Free throws</h3>
+      <div class="confirm-wrapper">
+        <label>
+          <input type="radio" name="throws" />
+          <span class="conf-poss" id="checkYes" ng-click="action.showThrows = true">YES</span>
+        </label>
+        <label>
+          <input type="radio" checked name="throws" />
+          <span class="conf-poss" id="checkNo" ng-click="action.showThrows = false">NO</span>
+        </label>
+      </div>
+    </div>
+    <div class="send-wrapper">
+      <div class="event-detail-send" ng-click="event(Code.Foul,action.team,EventType)">
+        <span>Cancel</span>
+      </div>
+      <div class="undo-event" ng-click="undoEvent(Code.Foul,action.team, lastSentEventId)">
+        <span>Send</span>
+      </div>
+    </div>
+  </div>
+</div>

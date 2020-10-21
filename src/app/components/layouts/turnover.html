@@ -1,0 +1,53 @@
+<div class="event-detail-wrapper">
+  <!--<h2>TURNOVER {{team[action.team]}}</h2>-->
+  <div class="event-detail-left">
+    <div class="event-type-wrapper">
+      <div class="scroll-content event-type-center">
+        <div class="close-area" ng-click="closeArea();undoEvent(Code.Turnover,action.team, lastSentEventId)"></div>
+        <div class="event-types">
+          <h3 class="">Select Type</h3>
+          <div class="confirm-wrapper" ng-repeat="(key, value) in EventDetail.Turnover">
+            <label>
+              <input type="radio" name="type" ng-click="setEventDetail($event, 'type', value, 'true')" />
+              <span class="event-type">{{value}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="event-detail-right">
+    <div class="event-detail-players">
+      <div ng-show="action.type && action.type!='8 Seconds' && action.type!='24 Seconds'">
+        <h3>Select Player</h3>
+        <div class="starting-players confirm-wrapper">
+          <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
+            <input type="radio" name="player" ng-click="setEventDetail($event, 'player_id', p)" />
+            <div class="team-player">
+              <span>{{playersShirtNumber[p]}}</span>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div ng-show="action.type=='Bad Pass' || action.type=='Ball Handling'">
+        <h3>Select Opponent</h3>
+        <div class="starting-players confirm-wrapper">
+          <label ng-repeat="p in action.team == 1 ? playersAway.starting : playersHome.starting">
+            <input type="radio" name="assistant" ng-click="setEventDetail($event, 'assistant_id', p)" />
+            <div class="team-player">
+              <span>{{playersShirtNumber[p]}}</span>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="send-wrapper">
+      <div class="event-detail-send" ng-click="event(Code.Turnover,action.team,EventType)">
+        <span>Send</span>
+      </div>
+      <div class="undo-event" ng-click="undoEvent(Code.Turnover,action.team, lastSentEventId)">
+        <span>Undo</span>
+      </div>
+    </div>
+  </div>
+</div>

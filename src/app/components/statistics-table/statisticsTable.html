@@ -1,0 +1,597 @@
+<div class="statistic-wrapper">
+  <div class="page inside-statistic-wrapper">
+    <div class="statistic-wr-header">
+      <div class="statistic-wr-header-inner">
+        <div class="st-wr-header-inner-item left">
+          <a class="h-inner-item-l" ng-click="vm.back()">
+            <span class="bc-i-arrow-back back-icon"></span>
+          </a>
+        </div>
+        <div class="st-wr-header-inner-item center">
+          <a class="h-inner-item-l" href="#">
+            <img src="../../../../assets/img/logo-deep-new.png" alt="" />
+          </a>
+        </div>
+        <div class="st-wr-header-inner-item right">
+          <a class="h-inner-item-l" onClick="window.print()">
+            <span class="bc-i-print printer-icon"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="statistic-wr-content">
+      <div class="info-top-block">
+        <table class="info-top-block-t">
+          <td>
+            <h3 class="info-t-block-title">{{vm.game.league}}</h3>
+            <table class="info-t-inside-table">
+              <td>game start:</td>
+              <td>{{vm.game.start_time | date: 'MM/dd/yyyy'}}</td>
+              <td>{{vm.game.start_time | date: 'h:mma'}}</td>
+            </table>
+            <!--            <table class="info-t-inside-table">-->
+            <!--              <td>crew chief</td>-->
+            <!--              <td>mnatsakan avetisyan (arm)</td>-->
+            <!--            </table>-->
+            <!--            <table class="info-t-inside-table">-->
+            <!--              <td>umpire(s):</td>-->
+            <!--              <td>harutyun yesayan (arm)</td>-->
+            <!--              <td>davit kikhyan (arm)</td>-->
+            <!--            </table>-->
+          </td>
+          <td align="right">
+            <!--            <table class="game-number-t">-->
+            <!--              <td>game no:</td>-->
+            <!--              <td>3764529</td>-->
+            <!--            </table>-->
+            <!--            <table class="info-t-inside-table">-->
+            <!--              <td>attendance:</td>-->
+            <!--              <td>88</td>-->
+            <!--            </table>-->
+            <!--            <table class="info-t-inside-table">-->
+            <!--              <td>game duration</td>-->
+            <!--              <td>01:20</td>-->
+            <!--            </table>-->
+            <table class="info-t-inside-table">
+              <td>report generated:</td>
+              <td>{{vm.printTime | date: 'MM/dd/yyyy h:mma'}}</td>
+            </table>
+          </td>
+        </table>
+      </div>
+      <div class="game-score-info">
+        <table class="game-score-info-t">
+          <td>
+            <div class="for-table-wr-b top-border">
+              <table class="team-score-t">
+                <tr>
+                  <td colspan="8">
+                    <span class="team-name-spn">{{vm.game.home_team}}</span>
+                  </td>
+                  <td class="with-bg" rowspan="4" colspan="2">
+                    <span class="score-spn">{{vm.gameResult.home}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">q1</td>
+                  <td colspan="2">q2</td>
+                  <td colspan="2">q3</td>
+                  <td colspan="2">q4</td>
+                </tr>
+                <tr>
+                  <td>{{vm.localStatistics["h1~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h1~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h2~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h2~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h3~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h3~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h4~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h4~2~"+vm.Code.TotalPoints] || 0}}</td>
+                </tr>
+              </table>
+            </div>
+          </td>
+          <td class="center-cell">:</td>
+          <td>
+            <div class="for-table-wr-b top-border">
+              <table class="team-score-t">
+                <tr>
+                  <td class="with-bg" rowspan="4" colspan="2">
+                    <span class="score-spn">{{vm.gameResult.away}}</span>
+                  </td>
+                  <td colspan="8">
+                    <span class="team-name-spn">{{vm.game.away_team}}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2">q1</td>
+                  <td colspan="2">q2</td>
+                  <td colspan="2">q3</td>
+                  <td colspan="2">q4</td>
+                </tr>
+                <tr>
+                  <td>{{vm.localStatistics["h1~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h1~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h2~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h2~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h3~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h3~1~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h4~2~"+vm.Code.TotalPoints] || 0}}</td>
+                  <td>{{vm.localStatistics["h4~1~"+vm.Code.TotalPoints] || 0}}</td>
+                </tr>
+              </table>
+            </div>
+          </td>
+        </table>
+      </div>
+      <div class="game-players-info">
+        <div class="for-table-wr-b">
+          <table class="game-players-info-t">
+            <tr>
+              <th class="with-bg" colspan="25">
+                <span class="game-players-info-t-title">{{vm.game.home_team}}</span>
+              </th>
+            </tr>
+            <tr>
+              <td rowspan="2">no</td>
+              <td rowspan="2" colspan="4">players</td>
+              <td rowspan="2">min</td>
+              <td colspan="2">field goals</td>
+              <td colspan="2">2 points</td>
+              <td colspan="2">3 points</td>
+              <td colspan="2">free throws</td>
+              <td colspan="3">Rebounds</td>
+              <td rowspan="2">AS</td>
+              <td rowspan="2">TO</td>
+              <td rowspan="2">ST</td>
+              <td rowspan="2">BS</td>
+              <td colspan="2">fouls</td>
+              <td rowspan="2">+/-</td>
+              <td rowspan="2">PTS</td>
+            </tr>
+            <tr>
+              <td>M/A</td>
+              <td>%</td>
+              <td>M/A</td>
+              <td>%</td>
+              <td>M/A</td>
+              <td>%</td>
+              <td>M/A</td>
+              <td>%</td>
+              <td>OR</td>
+              <td>DR</td>
+              <td>TOT</td>
+              <td>PF</td>
+              <td>FD</td>
+            </tr>
+            <tr ng-repeat="player in vm.playersStatisticTeam1">
+              <td>{{player.shirt_number}}</td>
+              <td colspan="4">{{player.name}}</td>
+              <td>{{player.playedTime}}</td>
+              <td>
+                {{+player.two_points + +player.three_points }} / {{+player.two_points + +player.three_points +
+                +player.two_points_missed + +player.three_points_missed}}
+              </td>
+              <td>
+                {{(+player.two_points + +player.three_points) / (+player.two_points + +player.three_points +
+                +player.two_points_missed + +player.three_points_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.two_points}} / {{+player.two_points + +player.two_points_missed }}</td>
+              <td>
+                {{+player.two_points / (+player.two_points + +player.two_points_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.three_points}} / {{+player.three_points + +player.three_points_missed }}</td>
+              <td>
+                {{+player.three_points / (+player.three_points + +player.three_points_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.free_throw}} - {{+player.free_throw + +player.free_throw_missed }}</td>
+              <td>
+                {{+player.free_throw / (+player.free_throw + +player.free_throw_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.rebound - +player.rebound_defensive}}</td>
+              <td>{{+player.rebound_defensive}}</td>
+              <td>{{+player.rebound}}</td>
+              <td>{{+player.assist}}</td>
+              <td>{{+player.turnover}}</td>
+              <td>{{+player.still}}</td>
+              <td>{{+player.block}}</td>
+              <td>{{+player.foul}}</td>
+              <td>{{+player.foul_r}}</td>
+              <td>{{+player.minus_plus.count || 0}}</td>
+              <td>{{player.total_points}}</td>
+            </tr>
+            <tr>
+              <td colspan="5">team<!--/coach--></td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>{{(vm.teamTotalRebounds.home - vm.teamReboundsData.home['totalRebounds'])|| 0}}</td>
+              <td>.</td>
+              <td>{{vm.localStatistics["1~"+vm.Code.Turnover] || '.'}}</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+            </tr>
+            <tr>
+              <td colspan="5">totals</td>
+              <td>{{vm.min_1+'.'+vm.sec_1 || 0}}</td>
+              <td>{{+vm.p2_1 + +vm.p3_1 }} / {{+vm.p2_1 + +vm.p3_1 + +vm.pm2_1 + +vm.pm3_1}}</td>
+              <td>{{vm.pointsPercentStatistics.filedGoalsHome || 0}}</td>
+              <td>{{+vm.p2_1}} / {{+vm.p2_1 + +vm.pm2_1}}</td>
+              <td>{{vm.pointsPercentStatistics.twoPointsHome || 0}}</td>
+              <td>{{+vm.p3_1}} - {{+vm.p3_1 + +vm.pm3_1 }}</td>
+              <td>{{vm.pointsPercentStatistics.threePointsHome || 0}}</td>
+              <td>{{+vm.ft1}} - {{+vm.ft1 + +vm.ftm1 }}</td>
+              <td>{{vm.pointsPercentStatistics.freeThrowsHome || 0}}</td>
+              <td>
+                {{(vm.teamReboundsData.home['totalRebounds'] || 0) -
+                (vm.teamReboundsData.home['rebound_defensive_total'] || 0)}}
+              </td>
+              <td>{{vm.teamReboundsData.home['rebound_defensive_total'] || 0}}</td>
+              <td>{{vm.teamTotalRebounds.home || 0}}</td>
+              <td>{{vm.ast1}}</td>
+              <td>{{vm.po1 + (+vm.localStatistics["1~"+vm.Code.Turnover] || 0)}}</td>
+              <td>{{vm.stl1}}</td>
+              <td>{{vm.bk1}}</td>
+              <td>{{vm.pf1}}</td>
+              <td>{{vm.foul_r1}}</td>
+              <td>--</td>
+              <td>{{vm.localStatistics["1~"+vm.Code.TotalPoints] || 0 }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="game-players-info">
+        <div class="for-table-wr-b">
+          <table class="game-players-info-t">
+            <tr>
+              <th class="with-bg" colspan="25">
+                <span class="game-players-info-t-title">{{vm.game.away_team}}</span>
+              </th>
+            </tr>
+            <tr>
+              <td rowspan="2">no</td>
+              <td rowspan="2" colspan="4">players</td>
+              <td rowspan="2">min</td>
+              <td colspan="2">field goals</td>
+              <td colspan="2">2 points</td>
+              <td colspan="2">3 points</td>
+              <td colspan="2">free throws</td>
+              <td colspan="3">Rebounds</td>
+              <td rowspan="2">AS</td>
+              <td rowspan="2">TO</td>
+              <td rowspan="2">ST</td>
+              <td rowspan="2">BS</td>
+              <td colspan="2">fouls</td>
+              <td rowspan="2">+/-</td>
+              <td rowspan="2">PTS</td>
+            </tr>
+            <tr>
+              <td>M/A</td>
+              <td>%</td>
+              <td>M/A</td>
+              <td>%</td>
+              <td>M/A</td>
+              <td>%</td>
+              <td>M/A</td>
+              <td>%</td>
+              <td>OR</td>
+              <td>DR</td>
+              <td>TOT</td>
+              <td>PF</td>
+              <td>FD</td>
+            </tr>
+            <tr ng-repeat="player in vm.playersStatisticTeam2">
+              <td>{{player.shirt_number}}</td>
+              <td colspan="4">{{player.name}}</td>
+              <td>{{player.playedTime}}</td>
+              <td>
+                {{+player.two_points + +player.three_points }} / {{+player.two_points + +player.three_points +
+                +player.two_points_missed + +player.three_points_missed}}
+              </td>
+              <td>
+                {{(+player.two_points + +player.three_points) / (+player.two_points + +player.three_points +
+                +player.two_points_missed + +player.three_points_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.two_points}} / {{+player.two_points + +player.two_points_missed }}</td>
+              <td>
+                {{+player.two_points / (+player.two_points + +player.two_points_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.three_points}} / {{+player.three_points + +player.three_points_missed }}</td>
+              <td>
+                {{+player.three_points / (+player.three_points + +player.three_points_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.free_throw}} - {{+player.free_throw + +player.free_throw_missed }}</td>
+              <td>
+                {{+player.free_throw / (+player.free_throw + +player.free_throw_missed) * 100 || 0 | numberFloor}}
+              </td>
+              <td>{{+player.rebound - +player.rebound_defensive}}</td>
+              <td>{{+player.rebound_defensive}}</td>
+              <td>{{+player.rebound}}</td>
+              <td>{{+player.assist}}</td>
+              <td>{{+player.turnover}}</td>
+              <td>{{+player.still}}</td>
+              <td>{{+player.block}}</td>
+              <td>{{+player.foul}}</td>
+              <td>{{+player.foul_r}}</td>
+              <td>{{+player.minus_plus.count || 0}}</td>
+              <td>{{player.total_points}}</td>
+            </tr>
+            <tr>
+              <td colspan="5">team<!--/coach--></td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>{{(vm.teamTotalRebounds.away - vm.teamReboundsData.away['totalRebounds']) || 0}}</td>
+              <td>.</td>
+              <td>{{vm.localStatistics["2~"+vm.Code.Turnover] || '.'}}</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+              <td>.</td>
+            </tr>
+            <tr>
+              <td colspan="5">totals</td>
+              <td>{{vm.min_2+'.'+vm.sec_2 || 0}}</td>
+              <td>{{+vm.p2_2 + +vm.p3_2 }} / {{+vm.p2_2 + +vm.p3_2 + +vm.pm2_2 + +vm.pm3_2}}</td>
+              <td>{{vm.pointsPercentStatistics.filedGoalsAway || 0}}</td>
+              <td>{{+vm.p2_2}} / {{+vm.p2_2 + +vm.pm2_2}}</td>
+              <td>{{vm.pointsPercentStatistics.twoPointsAway || 0}}</td>
+              <td>{{+vm.p3_2}} - {{+vm.p3_2 + +vm.pm3_2 }}</td>
+              <td>{{vm.pointsPercentStatistics.threePointsAway || 0}}</td>
+              <td>{{+vm.ft2}} - {{+vm.ft2 + +vm.ftm2 }}</td>
+              <td>{{vm.pointsPercentStatistics.freeThrowsAway || 0}}</td>
+              <td>
+                {{(vm.teamReboundsData.away['totalRebounds'] || 0) -
+                (vm.teamReboundsData.away['rebound_defensive_total'] || 0)}}
+              </td>
+              <td>{{vm.teamReboundsData.away['rebound_defensive_total'] || 0}}</td>
+              <td>{{vm.teamTotalRebounds.away}}</td>
+              <td>{{vm.ast2}}</td>
+              <td>{{vm.po2 + (vm.localStatistics["2~"+vm.Code.Turnover] || 0)}}</td>
+              <td>{{vm.stl2}}</td>
+              <td>{{vm.bk2}}</td>
+              <td>{{vm.pf2}}</td>
+              <td>{{vm.foul_r2}}</td>
+              <td>--</td>
+              <td>{{vm.localStatistics["2~"+vm.Code.TotalPoints] || 0 }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="bottom-info-block" ng-if="vm.statistics">
+        <table class="bottom-info-block-t">
+          <tr>
+            <td>
+              <div class="for-table-wr-b top-border">
+                <table class="inside-t-bottom-info-block-t">
+                  <tr>
+                    <td colspan="3">type</td>
+                    <td colspan="2">{{vm.game.home_team}}</td>
+                    <td colspan="2">{{vm.game.away_team}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">points from turnovers</td>
+                    <td colspan="2">{{vm.additionalStatistics.points_from_turnover_home}}</td>
+                    <td colspan="2">{{vm.additionalStatistics.points_from_turnover_away}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">points in the paint</td>
+                    <td colspan="2">{{vm.additionalStatistics.points_of_paints.home}}</td>
+                    <td colspan="2">{{vm.additionalStatistics.points_of_paints.away}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">second chance points</td>
+                    <td colspan="2">--</td>
+                    <td colspan="2">--</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">fast break points</td>
+                    <td colspan="2">{{vm.additionalStatistics.fast_break_point_home}}</td>
+                    <td colspan="2">{{vm.additionalStatistics.fast_break_point_away}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">bench points</td>
+                    <td colspan="2">{{vm.additionalStatistics.bench_point_home}}</td>
+                    <td colspan="2">{{vm.additionalStatistics.bench_point_away}}</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+            <td>
+              <div class="for-table-wr-b top-border">
+                <table class="inside-t-bottom-info-block-t">
+                  <tr>
+                    <td colspan="3">type</td>
+                    <td colspan="2">{{vm.game.home_team}}</td>
+                    <td colspan="2">{{vm.game.away_team}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Biggest Lead</td>
+                    <td colspan="4">{{vm.additionalStatistics.biggest_lead}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Biggest Scoring Run</td>
+                    <td colspan="2">{{vm.additionalStatistics.biggest_scoring_run_home}}</td>
+                    <td colspan="2">{{vm.additionalStatistics.biggest_scoring_run_away}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Lead Changes</td>
+                    <td colspan="4">{{vm.additionalStatistics.lead_changes}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Times Tied</td>
+                    <td colspan="4">{{vm.additionalStatistics.times_tied}}</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3">Time with Lead</td>
+                    <td colspan="2">--</td>
+                    <td colspan="2">--</td>
+                  </tr>
+                </table>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="hint-bottom-block">
+        <table class="hint-bottom-block-t">
+          <tr>
+            <td class="hint-bottom-block-t-cell">
+              <table class="hint-bottom-block-t-inner">
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">no</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Playing Number</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">dr</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Defensive Rebounds</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">bs</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Blocked Shots</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">ef</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Efficiency</td>
+                </tr>
+              </table>
+            </td>
+            <td class="hint-bottom-block-t-cell">
+              <table class="hint-bottom-block-t-inner">
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">min</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Minutes Played</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">to</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Total Rebounds</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">ba</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Blocks Against</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">pts</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Points</td>
+                </tr>
+              </table>
+            </td>
+            <td class="hint-bottom-block-t-cell">
+              <table class="hint-bottom-block-t-inner">
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">m/a</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Made Attempts</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">as</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Assists</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">pf</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Personal Fouls</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">%</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Shooting Percentage</td>
+                </tr>
+              </table>
+            </td>
+            <td class="hint-bottom-block-t-cell">
+              <table class="hint-bottom-block-t-inner">
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">to</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Turnovers</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">fd</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Fouls Drawn</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">(c)</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Captain</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">or</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Offensive Rebounds</td>
+                </tr>
+              </table>
+            </td>
+            <td class="hint-bottom-block-t-cell">
+              <table class="hint-bottom-block-t-inner">
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">st</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Steals</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">+/-</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Plus / Minus</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">dnp</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Did Not Play</td>
+                </tr>
+                <tr>
+                  <td class="hint-bottom-block-t-i-bold">fbrk</td>
+                  <td class="hint-bottom-block-t-i-line">-</td>
+                  <td>Fast Break Points</td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="statistic-wr-footer">
+      <table class="statistic-wr-footer-t">
+        <td>
+          <a href="#">
+            <img src="../../../../assets/img/logo-feed.png" alt="" />
+          </a>
+        </td>
+      </table>
+    </div>
+  </div>
+</div>

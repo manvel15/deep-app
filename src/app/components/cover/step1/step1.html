@@ -1,0 +1,363 @@
+<div class="scroll-content">
+  <div class="cov-page-midd-ins">
+    <div class="cov-page-midd-ins-left">
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-inp-wr">
+          <input
+            type="text"
+            required
+            class="input-venue"
+            ng-model="venueAndStaff.venue.selectedValue"
+            ng-focus="choseGameStaff($event)"
+            ng-blur="choseGameStaff($event)"
+            ng-change="change('venue')"
+          />
+          <label class="venue-lab">Venue</label>
+          <div class="open-ven-wr">
+            <div class="open-ven-wr-pad">
+              <div class="open-ven-con">
+                <div class="open-ven-inside">
+                  <p
+                    class="p-title-venue"
+                    ng-repeat="venue in preGameData.venue"
+                    ng-click="selectOption(venue, 'venue')"
+                  >
+                    {{venue.name}}
+                  </p>
+                  <div class="d-add-coach" ng-if="!preGameData.venue.length && venueAndStaff.venue.setCustomValue" ng-click="addOption('venue')">
+                    <p class="p-add-coach-left">Add</p>
+                    <p class="p-add-coach-right">'{{venueAndStaff.venue.setCustomValue}}'</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                ng-model="venueAndStaff.referee.selectedValue"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+                ng-change="change('referee')"
+              />
+              <label class="venue-lab">Referee</label>
+              <div class="open-ven-wr" ng-if="preGameData.referee.length || venueAndStaff.referee.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.referee"
+                        ng-click="selectOption(item, 'referee')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.referee.length && venueAndStaff.referee.setCustomValue"
+                        ng-click="addOption('referee')"
+                      >
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{venueAndStaff.referee.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{staffCountry.referee.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'referee')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                ng-model="venueAndStaff.umpire1.selectedValue"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+                ng-change="change('umpire1')"
+              />
+              <label class="venue-lab">Umpire 1</label>
+              <div class="open-ven-wr" ng-if="preGameData.umpire1.length || venueAndStaff.umpire1.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.umpire1"
+                        ng-click="selectOption(item, 'umpire1')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.umpire1.length && venueAndStaff.umpire1.setCustomValue"
+                        ng-click="addOption('umpire1')"
+                      >
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{venueAndStaff.umpire1.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{staffCountry.umpire1.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'umpire1')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="cov-page-midd-ins-right">
+      <div class="cov-page-midd-ins-block">
+        <div class="midd-ins-bl-count">
+          <div class="midd-ins-bl-count-item">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                name="quarter_count"
+                ng-model="preGameData.game.period_count"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+              />
+              <label class="venue-lab">Count</label>
+            </div>
+          </div>
+          <div class="midd-ins-bl-count-item center">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                name="quarter_length"
+                ng-model="preGameData.game.period_duration"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+              />
+              <label class="venue-lab">Length</label>
+            </div>
+          </div>
+          <div class="midd-ins-bl-count-item">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                name="overtime"
+                ng-model="preGameData.game.overtime_length"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+              />
+              <label class="venue-lab">Overtime</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                ng-model="venueAndStaff.commissioner.selectedValue"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+                ng-change="change('commissioner')"
+              />
+              <label class="venue-lab">Commissioner</label>
+              <div
+                class="open-ven-wr"
+                ng-if="preGameData.commissioner.length || venueAndStaff.commissioner.setCustomValue"
+              >
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.commissioner"
+                        ng-click="selectOption(item, 'commissioner')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.commissioner.length && venueAndStaff.commissioner.setCustomValue"
+                        ng-click="addOption('commissioner')"
+                      >
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{venueAndStaff.commissioner.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{staffCountry.commissioner.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'commissioner')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cov-page-midd-ins-block">
+        <div class="mid-ins-cont-fl">
+          <div class="mid-ins-cont-fl-left">
+            <div class="mid-ins-inp-wr">
+              <input
+                required
+                type="text"
+                class="input-venue"
+                ng-model="venueAndStaff.umpire2.selectedValue"
+                ng-focus="choseGameStaff($event)"
+                ng-blur="choseGameStaff($event)"
+                ng-change="change('umpire2')"
+              />
+              <label class="venue-lab">Umpire 2</label>
+              <div class="open-ven-wr" ng-if="preGameData.umpire2.length || venueAndStaff.umpire2.setCustomValue">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <p
+                        class="p-title-venue"
+                        ng-repeat="item in preGameData.umpire2"
+                        ng-click="selectOption(item, 'umpire2')"
+                      >
+                        {{item.name}}
+                      </p>
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.umpire2.length && venueAndStaff.umpire2.setCustomValue"
+                        ng-click="addOption('umpire2')"
+                      >
+                        <p class="p-add-coach-left">Add</p>
+                        <p class="p-add-coach-right">'{{venueAndStaff.umpire2.setCustomValue}}'</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mid-ins-cont-fl-right">
+            <div class="mid-ins-inp-wr" ng-click="toggleCountryFlags($event)">
+              <div class="mid-ind-r-cont-flag">
+                <div class="mid-ind-r-cont-flag-img">
+                  <div class="cont-flag-img-ins flag-{{staffCountry.umpire2.name.toLowerCase()}}"></div>
+                </div>
+                <div class="mid-ind-r-cont-flag-icon">
+                  <i class="bc-icon-sort-down"></i>
+                </div>
+              </div>
+              <div class="open-ven-wr">
+                <div class="open-ven-wr-pad">
+                  <div class="open-ven-con">
+                    <div class="open-ven-inside">
+                      <div
+                        class="mid-ind-r-cont-flag-img"
+                        ng-repeat="country in preGameData.country"
+                        ng-click="selectCountry(country, 'umpire2')"
+                      >
+                        <div class="cont-flag-img-ins flag-{{country.name.toLowerCase()}}"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

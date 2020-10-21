@@ -1,0 +1,48 @@
+<div class="main-wrapper-holder">
+  <div class="main-wrapper">
+    <div class="top-of-layout" header></div>
+
+    <div class="content-of-layout">
+      <div class="cover-page-wr">
+        <div class="cover-page-ins">
+          <form form-validation-directive="next" novalidate>
+          <div class="cover-page-content">
+            <div class="cover-page-c-top">
+              <div
+                class="steps-images-wrapper"
+                ng-class="vm.currentStep === 3 ? 'step-1 step-2' : vm.currentStep === 2 ? 'step-1' : ''"
+              >
+                <div class="inner-steps-images-wrapper">
+                  <img class="back-side-img" src="./assets/images/back-side.png" alt="" />
+                  <div class="front-side-img-wr">
+                    <img class="front-side-img" src="./assets/images/front-side.png" alt="" />
+                  </div>
+                  <div class="ball-block-wr">
+                    <div class="ball-block"></div>
+                  </div>
+                </div>
+                <p class="steps-title" ng-if="vm.currentStep == 1">game info</p>
+                <p class="steps-title" ng-if="vm.currentStep == 2">team info</p>
+                <p class="steps-title" ng-if="vm.currentStep == 3">player info</p>
+              </div>
+            </div>
+            <div class="cover-page-c-middle">
+              <div class="cov-page-midd-wr" step-one ng-if="vm.currentStep == 1"></div>
+              <div class="cov-page-midd-wr" step-two ng-if="vm.currentStep == 2"></div>
+              <div class="cov-page-team-table-wr" step-three ng-if="vm.currentStep == 3"></div>
+            </div>
+            <div class="cover-page-c-bottom">
+              <div class="cover-page-c-bot-wr">
+                <div class="cover-p-bot-con">
+                  <div class="cover-p-bot-con-left" ng-click="vm.back()">Back</div>
+                  <button class="cover-p-bot-con-left" type="submit">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

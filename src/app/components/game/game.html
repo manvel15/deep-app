@@ -1,0 +1,409 @@
+<div class="main-wrapper-holder">
+  <div class="main-wrapper">
+    <div class="top-of-layout" header></div>
+    <div class="content-of-layout">
+      <div class="content-wr">
+        <div class="content-wr-left">
+          <!--add remove class active-->
+          <div class="content-wr-left-ow">
+            <div class="icon-d-open"><i class="bc-icon-chevron-small-left"></i></div>
+            <div class="content-wr-left-wr">
+              <div class="title-left-wr">
+                <div>History</div>
+                <div class="icons-history">
+                  <i class="bc-icon-description more_events ng-binding" ng-click="setToggle()"></i>
+                  <a class="header-nav-right-item" ng-show="currentPath === '/game/384954'" href="/#!/statisticsTable/384954">
+                    <i class="bc-icon-history printBtn"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="inside-left-wr">
+                <div class="inside-top">
+                  <div class="cha-block">
+                    <span class="cha-text">CHA</span>
+                    <span class="cha-text">Q1</span>
+                    <span class="cha-time">10:30</span>
+                  </div>
+                  <div class="icons-fav-cl">
+                    <i class="bc-icon-star"></i>
+                    <i class="bc-icon-delete"></i>
+                  </div>
+                </div>
+                <div class="inside-bottom">
+                  <h3>Foul Double</h3>
+                  <p>Player: <span>03. Name</span></p>
+                  <p>Player: <span>03. Name</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="content-wr-right">
+          <div class="scroll-content">
+            <div class="header-info">
+              <div class="team-container">
+                <div class="team-wrapper" ng-class="{'order-last' : isTeamsSwapped}">
+                  <div class="team" ng-class="{'order-last' : isTeamsSwapped}" title="{{team[1]}}">{{team[1]}}</div>
+                  <div class="team-logo">
+                    <img
+                      src="https://statistics.betcoapps.com/images/e/m/{{team.home_agp / 2000 | numberFloor}}/{{team.home_agp}}.png"
+                    />
+                  </div>
+                </div>
+                <div class="points-wrapper">
+                  <div class="team-points-wrapper">
+                    <div class="home-team-points" ng-class="{'order-last' : isTeamsSwapped}">
+                      <span>{{localStatistics["1~"+Code.TotalPoints] || "00"}}</span>
+                    </div>
+                    <div class="home-team-border"></div>
+                    <div class="home-team-points" ng-class="{'order-first' : isTeamsSwapped}">
+                      <span>{{localStatistics["2~"+Code.TotalPoints] || "00"}}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="team-wrapper" ng-class="{'order-first' : isTeamsSwapped}">
+                  <div class="team-logo">
+                    <img
+                      src="https://statistics.betcoapps.com/images/e/m/{{team.away_agp / 2000 | numberFloor}}/{{team.away_agp}}.png"
+                    />
+                  </div>
+                  <div class="team" ng-class="{'order-first' : isTeamsSwapped}" title="{{team[2]}}">{{team[2]}}</div>
+                </div>
+              </div>
+              <div class="timer-wrapper" ng-class="{'disabled' : matchStatus == 0}">
+                <div class="minute-wrapper">
+                  <div
+                    class="minute-top"
+                    ng-class="{'disabled' : disableButtons && !changeTime}"
+                    ng-click="changeMinute('top')"
+                  >
+                    <i class="bc-icon-arrow_drop_down"></i>
+                  </div>
+                  <div
+                    class="minute-bottom"
+                    ng-class="{'disabled' : disableButtons && !changeTime}"
+                    ng-click="changeMinute('bottom')"
+                  >
+                    <i class="bc-icon-arrow_drop_top"></i>
+                  </div>
+                </div>
+                <game-timer class="game-timer"></game-timer>
+                <div class="change-time-wrapper" ng-show="changeTime">
+                  <div class="change-time" ng-click="event(Code.ChangeTime)">Change</div>
+                  <div class="cancel-change-time" ng-click="cancelTimeChange()">Cancel</div>
+                </div>
+                <div class="second-wrapper">
+                  <div
+                    class="second-top"
+                    ng-class="{'disabled' : disableButtons && !changeTime}"
+                    ng-click="changeSecond('top')"
+                  >
+                    <i class="bc-icon-arrow_drop_down"></i>
+                  </div>
+                  <div
+                    class="second-bottom"
+                    ng-class="{'disabled' : disableButtons && !changeTime}"
+                    ng-click="changeSecond('bottom')"
+                  >
+                    <i class="bc-icon-arrow_drop_top"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="fouls-wr">
+                <div class="fouls-row" ng-class="{'order-last' : isTeamsSwapped}">
+                  <div class="fouls-text">Folus:</div>
+                  <div
+                    class="team-bonus"
+                    ng-class="{'disabled': disableButtons, 'active': (localStatistics['h' + matchQuarter + '~2~'+Code.Foul] > 4 && matchStatus == 2) || (localStatistics['h4~2~'+Code.Foul] + localStatistics['to~2~'+Code.Foul] > 4)}"
+                  >
+                    Bonus
+                  </div>
+                </div>
+                <div class="timing-wr">
+                  <div
+                    class="ball-poss active disabled"
+                    ng-click="event(Code.BallPossession,Team.Home)"
+                    ng-class="{'active' : localPreferences[prefs.BALL_POSSESSION] == 1, 'disabled' : disableButtons, 'order-last' : isTeamsSwapped}"
+                  >
+                    <i class="bc-icon-ball"></i>
+                  </div>
+                  <div class="timeout-wr">
+                    <div
+                      ng-if="matchQuarter <=2 && matchStatus <=4"
+                      class="timeout-event"
+                      ng-class="{'disabled' : disableButtons && !enabledTimeoutButton || (disableButtons && isTimeOut && timeOutTeam == 1)}"
+                      ng-show="!isTimeOut || (timeOutTeam && timeOutTeam == 1)"
+                      ng-click="event(Code.Timeout,Team.Away)"
+                    >
+                      <!--TIMEOUT ({{localStatistics["2~"+Code.Timeout] || 0}})-->
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                    <div
+                      ng-if="matchQuarter >= 3 && matchStatus <=4"
+                      class="timeout-event"
+                      ng-class="{'disabled' : disableButtons && !enabledTimeoutButton || (disableButtons && isTimeOut && timeOutTeam == 1)}"
+                      ng-show="!isTimeOut || (timeOutTeam && timeOutTeam == 1)"
+                      ng-click="event(Code.Timeout,Team.Away)"
+                    >
+                      <!--TIMEOUT ({{localStatistics["h3~2~"+Code.Timeout] + localStatistics["h4~2~"+Code.Timeout]|| 0}})-->
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                    <div
+                      ng-if="matchStatus >=5"
+                      class="timeout-event"
+                      ng-class="{'disabled' : disableButtons && !enabledTimeoutButton || (disableButtons && isTimeOut && timeOutTeam == 1)}"
+                      ng-show="!isTimeOut || (timeOutTeam && timeOutTeam == 1)"
+                      ng-click="event(Code.Timeout,Team.Away)"
+                    >
+                      <!--TIMEOUT ({{localStatistics["to~2~"+Code.Timeout] || 0}})-->
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                    <div
+                      class="timeout-over"
+                      ng-show="isTimeOut && (timeOutTeam == 2 || !timeOutTeam)"
+                      ng-click="event(Code.TimeoutOver)"
+                    >
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                  </div>
+                  <div class="play-but">
+                    <div
+                      class="timer-start"
+                      ng-show="!isRunning &amp;&amp; !changeTime &amp;&amp; matchStatus != 3 &amp;&amp; matchStatus != 6 &amp;&amp; matchStatus != 4"
+                      ng-click="event(Code.TimerStart)"
+                    >
+                      <i class="bc-icon-play"></i>
+                    </div>
+                    <div
+                      class="timer-stop"
+                      ng-show="isRunning &amp;&amp; !changeTime &amp;&amp; matchStatus != 3 &amp;&amp; matchStatus != 6 &amp;&amp; matchStatus != 4"
+                      ng-click="event(Code.TimerStop)"
+                    >
+                      <i class="bc-icon-pause"></i>
+                    </div>
+                  </div>
+                  <div class="timeout-wr">
+                    <div
+                      ng-if="matchQuarter <=2 && matchStatus <=4"
+                      class="timeout-event"
+                      ng-class="{'disabled' : (disableButtons && !enabledTimeoutButton) || (disableButtons && isTimeOut && timeOutTeam == 2)}"
+                      ng-show="!isTimeOut || (isTimeOut && timeOutTeam == 2)"
+                      ng-click="event(Code.Timeout,Team.Home)"
+                    >
+                      <!--TIMEOUT ({{localStatistics["1~"+Code.Timeout] || 0}})-->
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                    <div
+                      ng-if="matchQuarter >= 3 && matchStatus <=4"
+                      class="timeout-event"
+                      ng-class="{'disabled' : (disableButtons && !enabledTimeoutButton) || (disableButtons && isTimeOut && timeOutTeam == 2)}"
+                      ng-show="!isTimeOut || (isTimeOut && timeOutTeam == 2)"
+                      ng-click="event(Code.Timeout,Team.Home)"
+                    >
+                      <!--TIMEOUT ({{localStatistics["h3~1~"+Code.Timeout] + localStatistics["h4~1~"+Code.Timeout]|| 0}})-->
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                    <div
+                      ng-if="matchStatus >=5"
+                      class="timeout-event"
+                      ng-class="{'disabled' : (disableButtons && !enabledTimeoutButton) || (disableButtons && isTimeOut && timeOutTeam == 2)}"
+                      ng-show="!isTimeOut || (isTimeOut && timeOutTeam == 2)"
+                      ng-click="event(Code.Timeout,Team.Home)"
+                    >
+                      <!--TIMEOUT ({{localStatistics["to~1~"+Code.Timeout] || 0}})-->
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                    <div
+                      class="timeout-over"
+                      ng-show="isTimeOut && (timeOutTeam == 1 || !timeOutTeam)"
+                      ng-click="event(Code.TimeoutOver)"
+                    >
+                      <i class="bc-icon-timeout"></i>
+                    </div>
+                  </div>
+                  <div
+                    class="ball-poss disabled"
+                    ng-class="{'active' : localPreferences[prefs.BALL_POSSESSION] == 2, 'disabled' : disableButtons, 'order-first' : isTeamsSwapped}"
+                    ng-click="event(Code.BallPossession,Team.Away)"
+                  >
+                    <i class="bc-icon-ball"></i>
+                  </div>
+                </div>
+                <div class="fouls-row" ng-class="{'order-first' : isTeamsSwapped}">
+                  <div
+                    class="team-bonus"
+                    ng-class="{'disabled': disableButtons, 'active': (localStatistics['h' + matchQuarter + '~2~'+Code.Foul] > 4 && matchStatus == 2) || (localStatistics['h4~2~'+Code.Foul] + localStatistics['to~2~'+Code.Foul] > 4)}"
+                  >
+                    Bonus
+                  </div>
+                  <div class="fouls-text">Folus:</div>
+                </div>
+              </div>
+            </div>
+            <div class="big-game-wr">
+              <div class="court-wrapper">
+                <div class="team-events" ng-class="{'order-last' : isTeamsSwapped}">
+                  <div class="team-event">
+                    <span ng-class="{'disabled' : disableButtons}" ng-click="event(Code.Foul,Team.Home)">Foul</span>
+                  </div>
+                  <div class="team-event">
+                    <span ng-class="{'disabled' : disableButtons}" ng-click="event(Code.Turnover,Team.Home)"
+                      >Turnover</span
+                    >
+                  </div>
+                  <div class="team-event">
+                    <span
+                      ng-class="{'disabled' : isTimeOut || disableButtons}"
+                      ng-click="openFreeThrowArea(Team.Home, true)"
+                      >Free Throw</span
+                    >
+                  </div>
+                  <div class="team-event">
+                    <span ng-class="{'disabled' : disableButtons}" ng-click="foulBenchCoach(Team.Home)"
+                      >Foul Bench/Coach</span
+                    >
+                  </div>
+                </div>
+                <div
+                  class="game-court-wrapper"
+                  ng-include="'./src/app/components/layouts/'+ Court +'.html'"
+                  onload="mappingImage()"
+                ></div>
+                <div class="team-events" ng-class="{'order-first' : isTeamsSwapped}">
+                  <div class="team-event">
+                    <span ng-class="{'disabled' : disableButtons}" ng-click="event(Code.Foul,Team.Away)">Foul</span>
+                  </div>
+                  <div class="team-event">
+                    <span ng-class="{'disabled' : disableButtons}" ng-click="event(Code.Turnover,Team.Away)"
+                      >Turnover</span
+                    >
+                  </div>
+                  <div class="team-event">
+                    <span
+                      ng-class="{'disabled' : isTimeOut || disableButtons}"
+                      ng-click="openFreeThrowArea(Team.Away, true)"
+                      >Free Throw</span
+                    >
+                  </div>
+                  <div class="team-event">
+                    <span ng-class="{'disabled' : disableButtons}" ng-click="foulBenchCoach(Team.Away)"
+                      >Foul Bench/Coach</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="bottom-info">
+              <div class="small-game-wr" ng-class="{'order-last' : isTeamsSwapped}">
+                <div class="home-players-wrapper">
+                  <div ng-class="{'disabled' : matchStatus === 0 ||  substitutionDisableCaseCourt.includes(Court)}">
+                    <!--<div class="team-name">{{team[1]}} Players</div>-->
+                    <div class="home-players">
+                      <div class="player-status">In Game</div>
+                      <div class="waiting-hide-block hide-last" ng-class="{'order-first' : isTeamsSwapped}">
+                        <div class="starting-players" ng-class="{'swapped' : isTeamsSwapped}">
+                          <div class="team-player" ng-repeat="p in playersHome.starting track by $index">
+                            <span ng-click="moveToReady(p, $index, playersHome)" playerId="{{p}}" playerTeam="1"
+                              >{{playersShirtNumber[p]}}
+                              <div ng-if="fifthFoul(p)" class="team-player-point">{{fifthFoul(p)}}</div>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="waiting-hide-block" ng-class="{'order-last' : isTeamsSwapped}">
+                      <!--<div class="player-status">For substitute</div>-->
+                      <div class="starting-players" ng-class="{'swapped' : isTeamsSwapped}">
+                        <div
+                          class="team-player in-game-player"
+                          ng-repeat="p in playersHome.readyForSub track by $index"
+                        >
+                          <span ng-click="moveBackToGame(p, $index, playersHome)"
+                            >{{playersShirtNumber[p]}}
+                            <div ng-if="fifthFoul(p)" class="team-player-point">{{fifthFoul(p)}}</div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="player-status">Waiting</div>
+                    <div class="waiting-hide-block" ng-class="{'order-last' : isTeamsSwapped}">
+                      <div class="waiting-players" ng-class="{'swapped' : isTeamsSwapped}">
+                        <div class="team-player waiting" ng-repeat="p in playersHome.waiting track by $index">
+                          <span
+                            ng-class="{'readOnly' : playersHome.readyForSubCheck.includes(p) || fifthFoul(p) === 5}"
+                            ng-click="moveToGame(p, $index, playersHome, $event)"
+                            playerId="{{p}}"
+                            playerTeam="1"
+                            >{{playersShirtNumber[p]}}
+                            <div ng-if="fifthFoul(p)" class="team-player-point">{{fifthFoul(p)}}</div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reverse-wrapper">
+                <div class="arrowsLeftRight" ng-click="teamsSwapp()">
+                  <i class="bc-icon-reverse"></i>
+                </div>
+                <div class="over-time-block">
+                  Overtime End
+                </div>
+              </div>
+              <div class="small-game-wr" ng-class="{'order-first' : isTeamsSwapped}">
+                <div class="away-players-wrapper">
+                  <div ng-class="{'disabled' : matchStatus === 0 || substitutionDisableCaseCourt.includes(Court)}">
+                    <!--<div class="team-name">{{team[2]}} Players</div>-->
+                    <div class="away-players">
+                      <div class="player-status">In Game</div>
+                      <div class="waiting-hide-block hide-first" ng-class="{'order-last' : isTeamsSwapped}">
+                        <div class="starting-players" ng-class="{'swapped' : isTeamsSwapped}">
+                          <div class="team-player" ng-repeat="p in playersAway.starting track by $index">
+                            <span ng-click="moveToReady(p, $index, playersAway)" playerId="{{p}}" playerTeam="2"
+                              >{{playersShirtNumber[p]}}
+                              <div ng-if="fifthFoul(p)" class="team-player-point">{{fifthFoul(p)}}</div>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="waiting-hide-block hide-first" ng-class="{'order-first' : isTeamsSwapped}">
+                      <div class="starting-players" ng-class="{'swapped' : isTeamsSwapped}">
+                        <div
+                          class="team-player in-game-player"
+                          ng-repeat="p in playersAway.readyForSub track by $index"
+                        >
+                          <span ng-click="moveBackToGame(p, $index, playersAway)"
+                            >{{playersShirtNumber[p]}}
+                            <div ng-if="fifthFoul(p)" class="team-player-point">{{fifthFoul(p)}}</div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="player-status">Waiting</div>
+                    <div class="waiting-hide-block" ng-class="{'order-first' : isTeamsSwapped}">
+                      <div class="waiting-players" ng-class="{'swapped' : isTeamsSwapped}">
+                        <div class="team-player waiting" ng-repeat="p in playersAway.waiting track by $index">
+                          <span
+                            ng-class="{'readOnly' : playersAway.readyForSubCheck.includes(p) || fifthFoul(p) === 5}"
+                            ng-click="moveToGame(p, $index, playersAway, $event)"
+                            playerId="{{p}}"
+                            playerTeam="2"
+                            >{{playersShirtNumber[p]}}
+                            <div ng-if="fifthFoul(p)" class="team-player-point">{{fifthFoul(p)}}</div>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
