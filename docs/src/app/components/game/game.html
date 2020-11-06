@@ -1,38 +1,114 @@
 <div class="main-wrapper-holder">
+  <div class="events-list" ng-class="{'active' : toggle}">
+    <div class="events-list-inside">
+      <div class="scroll-content">
+        <div class="events-titles">
+          <div class="events-title-item">Event</div>
+          <div class="events-title-item">Qualifier 1</div>
+          <div class="events-title-item">Qualifier 2</div>
+          <div class="events-title-item">Team</div>
+          <div class="events-title-item">Player</div>
+          <div class="events-title-item">Score</div>
+          <div class="events-title-item">QTR</div>
+          <div class="events-title-item">Time</div>
+          <div class="events-title-item">
+            <div class="events-icon-block">
+              <i class="bc-icon-chevron-small-left" ng-click="setToggle()" type="button">{{toggle ? '' : ''}}</i>
+            </div>
+          </div>
+        </div>
+        <div class="events-container" ng-class="{'disabled' : disableButtons && !enabledSomeButtons}">
+          <div
+            class="events-info"
+            ng-repeat="ev in eventList track by $index"
+            ng-class="{'undid' : ev.undid || ev.retake}"
+          >
+            <div class="events-info-item">{{EventName[ev.event.code]}}</div>
+            <div class="events-info-item">Personal</div>
+            <div class="events-info-item">Double</div>
+            <div class="events-info-item">{{data.game[TeamType[ev.event.team]] || '--'}}</div>
+            <div class="events-info-item">
+              {{players[ev.event_detail.player_id].shirt_number + ' ' + players[ev.event_detail.player_id].first_name +
+              ' ' + players[ev.event_detail.player_id].last_name}}
+            </div>
+            <div class="events-info-item">
+              {{ev.event.parsedStatistics["1~"+Code.TotalPoints] || "00"}} -
+              {{ev.event.parsedStatistics["2~"+Code.TotalPoints] || "00"}}
+            </div>
+            <div class="events-info-item">{{ev.event.parsedPreferences[prefs.CURRENT_HALF]}}</div>
+            <div class="events-info-item">{{ev.event.timerMillis | prettyFormatTime}}</div>
+            <div class="events-info-item">
+              <div class="events-icon-block">
+                <i
+                  class="bc-icon-star {{flagArray.includes(ev.event.id) ? 'active' : ''}}"
+                  ng-click="addFlag(ev.event.id)"
+                ></i>
+                <i
+                  class="bc-icon-delete {{ev.undid ? 'active' : 'disabled' }}"
+                  ng-click="undoEvent(ev.event.code, ev.event.team, ev.event.id)"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="main-wrapper">
     <div class="top-of-layout" header></div>
     <div class="content-of-layout">
       <div class="content-wr">
-        <div class="content-wr-left">
-          <!--add remove class active-->
+        <div class="content-wr-left" id="nav">
           <div class="content-wr-left-ow">
-            <div class="icon-d-open"><i class="bc-icon-chevron-small-left"></i></div>
+            <div class="icon-d-open" ng-click="toggleNavBar()"><i class="bc-icon-chevron-small-left"></i></div>
             <div class="content-wr-left-wr">
               <div class="title-left-wr">
                 <div>History</div>
                 <div class="icons-history">
-                  <i class="bc-icon-description more_events ng-binding" ng-click="setToggle()"></i>
-                  <a class="header-nav-right-item" ng-show="currentPath === '/game/384954'" href="/#!/statisticsTable/384954">
-                    <i class="bc-icon-history printBtn"></i>
+                  <i class="bc-icon-description more-events ng-binding" ng-click="setToggle()"></i>
+                  <a class="header-nav-right-item" href="/#!/statisticsTable/{{game_id}}">
+                    <i class="bc-icon-history print-btn"></i>
                   </a>
                 </div>
               </div>
-              <div class="inside-left-wr">
+              <div class="inside-left-wr" ng-repeat="ev in eventList track by $index">
                 <div class="inside-top">
                   <div class="cha-block">
-                    <span class="cha-text">CHA</span>
-                    <span class="cha-text">Q1</span>
-                    <span class="cha-time">10:30</span>
+                    <span class="cha-text" ng-if="ev.event.team">{{team[ev.event.team + '_short_name']}}</span>
+                    <span class="cha-text">{{ev.event.parsedPreferences[prefs.CURRENT_HALF]}}</span>
+                    <span class="cha-time">{{ev.event.timerMillis | prettyFormatTime}}</span>
                   </div>
                   <div class="icons-fav-cl">
-                    <i class="bc-icon-star"></i>
-                    <i class="bc-icon-delete"></i>
+                    <i
+                      class="bc-icon-star {{flagArray.includes(ev.event.id) ? 'active' : ''}}"
+                      ng-click="addFlag(ev.event.id)"
+                    ></i>
+                    <i
+                      class="bc-icon-delete {{ev.undid ? 'active' : 'disabled' }}"
+                      ng-click="undoEvent(ev.event.code, ev.event.team, ev.event.id)"
+                    ></i>
                   </div>
                 </div>
                 <div class="inside-bottom">
-                  <h3>Foul Double</h3>
-                  <p>Player: <span>03. Name</span></p>
-                  <p>Player: <span>03. Name</span></p>
+                  <h3>{{EventName[ev.event.code]}} {{ev.event_detail ? ev.event_detail.type : ''}}</h3>
+                  <ng-template ng-if="ev.event_detail">
+                    <p>
+                      Player:
+                      <span>
+                        {{players[ev.event_detail.player_id].shirt_number}}.
+                        {{players[ev.event_detail.player_id].first_name}}
+                        {{players[ev.event_detail.player_id].last_name}}
+                      </span>
+                    </p>
+                    <p>
+                      Assistant:
+                      <span>
+                        {{players[ev.event_detail.assistant_id].shirt_number}}.
+                        {{players[ev.event_detail.assistant_id].first_name}}
+                        {{players[ev.event_detail.assistant_id].last_name}}
+                      </span>
+                    </p>
+                  </ng-template>
                 </div>
               </div>
             </div>
@@ -72,39 +148,19 @@
               </div>
               <div class="timer-wrapper" ng-class="{'disabled' : matchStatus == 0}">
                 <div class="minute-wrapper">
-                  <div
-                    class="minute-top"
-                    ng-class="{'disabled' : disableButtons && !changeTime}"
-                    ng-click="changeMinute('top')"
-                  >
+                  <div class="minute-top" ng-class="{'disabled' : disableButtons}" ng-click="changeMinute('top')">
                     <i class="bc-icon-arrow_drop_down"></i>
                   </div>
-                  <div
-                    class="minute-bottom"
-                    ng-class="{'disabled' : disableButtons && !changeTime}"
-                    ng-click="changeMinute('bottom')"
-                  >
+                  <div class="minute-bottom" ng-class="{'disabled' : disableButtons}" ng-click="changeMinute('bottom')">
                     <i class="bc-icon-arrow_drop_top"></i>
                   </div>
                 </div>
                 <game-timer class="game-timer"></game-timer>
-                <div class="change-time-wrapper" ng-show="changeTime">
-                  <div class="change-time" ng-click="event(Code.ChangeTime)">Change</div>
-                  <div class="cancel-change-time" ng-click="cancelTimeChange()">Cancel</div>
-                </div>
                 <div class="second-wrapper">
-                  <div
-                    class="second-top"
-                    ng-class="{'disabled' : disableButtons && !changeTime}"
-                    ng-click="changeSecond('top')"
-                  >
+                  <div class="second-top" ng-class="{'disabled' : disableButtons}" ng-click="changeSecond('top')">
                     <i class="bc-icon-arrow_drop_down"></i>
                   </div>
-                  <div
-                    class="second-bottom"
-                    ng-class="{'disabled' : disableButtons && !changeTime}"
-                    ng-click="changeSecond('bottom')"
-                  >
+                  <div class="second-bottom" ng-class="{'disabled' : disableButtons}" ng-click="changeSecond('bottom')">
                     <i class="bc-icon-arrow_drop_top"></i>
                   </div>
                 </div>
@@ -121,7 +177,7 @@
                 </div>
                 <div class="timing-wr">
                   <div
-                    class="ball-poss active disabled"
+                    class="ball-poss"
                     ng-click="event(Code.BallPossession,Team.Home)"
                     ng-class="{'active' : localPreferences[prefs.BALL_POSSESSION] == 1, 'disabled' : disableButtons, 'order-last' : isTeamsSwapped}"
                   >
@@ -222,7 +278,7 @@
                     </div>
                   </div>
                   <div
-                    class="ball-poss disabled"
+                    class="ball-poss"
                     ng-class="{'active' : localPreferences[prefs.BALL_POSSESSION] == 2, 'disabled' : disableButtons, 'order-first' : isTeamsSwapped}"
                     ng-click="event(Code.BallPossession,Team.Away)"
                   >
@@ -406,4 +462,3 @@
     </div>
   </div>
 </div>
-
