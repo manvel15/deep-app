@@ -1,33 +1,32 @@
-<div class="event-detail-wrapper foul-bench">
-  <div class="event-type-wrapper">
-    <div class="event-types">
-      <h2>Foul {{team[action.team]}}</h2>
-      <h3 class="">Select Type</h3>
-      <div class="bench-wr confirm-wrapper">
-        <label>
-          <input type="radio" name="type" ng-click="setEventDetail($event, 'type', 'Bench', 'true')" />
-          <span class="event-type">Bench</span>
-        </label>
-        <label>
-          <input type="radio" name="type" ng-click="setEventDetail($event, 'type', 'Coach', 'true')" />
-          <span class="event-type">Coach</span>
-        </label>
-      </div>
+<div class="event_detail_wrapper">
+    <h2>Foul {{team[action.team]}}</h2>
+    <div class="event_type_wrapper">
+        <h3 class="">Select Type</h3>
+        <div class="event_types">
+            <div>
+                <label>
+                    <input type="radio" name="type" ng-click="setEventDetail($event, 'type', 'Bench', 'true')">
+                    <span class="event_type">Bench</span>
+                </label>
+                <label>
+                    <input type="radio" name="type" ng-click="setEventDetail($event, 'type', 'Coach', 'true')">
+                    <span class="event_type">Coach</span>
+                </label>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="event-detail-players">
-    <h3 class="freeThrow" ng-click="getCheckForInput()">With free throw</h3>
-    <label class="fast-point" ng-click="fastBr()">
-      <input class="free-throw-check" type="checkbox" name="freeThrow" ng-model="checkProperties.isChecked" />
-      <span class="checkmark"></span>
-    </label>
-  </div>
-  <div class="send-wrapper">
-    <div class="event-detail-send" ng-click="event(Code.FoulBenchCoach,action.team)">
-      <span>Send</span>
+    <h3 class="freeThrow" ng-click="getCheckForInput()">
+        <input type="checkbox"  name="freeThrow" ng-model="checkProperties.isChecked">
+        With free throw
+    </h3>
+</div>
+<div class="send_wrapper">
+    <div class="event_detail_send" ng-click="event(Code.FoulBenchCoach,action.team)">
+        <span>Send</span>
     </div>
-    <div class="undo-event" ng-click="cancelEvent(Code.FoulBenchCoach)">
-      <span>Cancel</span>
+    <div style="margin-right: 50px" class="undo_event" ng-click="cancelEvent(Code.FoulBenchCoach)">
+        <span>Cancel</span>
     </div>
-  </div>
+</div>
+
 </div>

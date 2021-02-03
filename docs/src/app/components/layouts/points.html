@@ -1,38 +1,39 @@
-<div class="event-detail-wrapper point-wr">
+<div class="event_detail_wrapper">
   <div>
     <h3>Select Team</h3>
-    <div class="confirm-wrapper teams-wr">
+    <div class="confirm_wrapper">
       <label ng-class="{'order-last' : isTeamsSwapped}">
         <input type="radio" ng-checked="action.team == Team.Home" name="team" />
-        <span class="event-type" ng-click="action.team = Team.Home">{{data.game.home_team}}</span>
+        <span class="event_type" ng-click="action.team = Team.Home">{{data.game.home_team}}</span>
       </label>
       <label ng-class="{'order-first' : isTeamsSwapped}">
         <input type="radio" ng-checked="action.team == Team.Away" name="team" />
-        <span class="event-type" ng-click="action.team = Team.Away">{{data.game.away_team}}</span>
+        <span class="event_type" ng-click="action.team = Team.Away">{{data.game.away_team}}</span>
       </label>
     </div>
   </div>
+
   <div>
     <h3>Select Points</h3>
-    <div class="confirm-wrapper points-wr">
+    <div class="confirm_wrapper">
       <label>
         <input type="radio" ng-checked="action.point == 2" name="points" />
-        <span class="event-type" ng-click="action.point = 2"><span class="count-point">2</span>pt</span>
+        <span class="event_type" ng-click="action.point = 2">2 points</span>
       </label>
       <label>
         <input type="radio" ng-checked="action.point == 3" name="points" />
-        <span class="event-type" ng-click="action.point = 3"><span class="count-point">3</span>pt</span>
+        <span class="event_type" ng-click="action.point = 3">3 points</span>
       </label>
     </div>
   </div>
   <div>
     <h3>Select Event</h3>
-    <div class="confirm-wrapper teams-wr">
+    <div class="confirm_wrapper">
       <label>
-        <span class="event-type scored" ng-click="createEvent('scored')">Scored</span>
+        <span class="event_type scored" ng-click="createEvent('scored')">Scored</span>
       </label>
       <label>
-        <span class="event-type missed" ng-click="createEvent('missed')">Missed</span>
+        <span class="event_type missed" ng-click="createEvent('missed')">Missed</span>
       </label>
     </div>
   </div>
@@ -40,13 +41,5 @@
     <input type="checkbox" ng-model="checkProperties.isChecked" />
     With free throw
   </h3>
-  <div class="send-wrapper">
-    <div class="event-detail-send" ng-click="event(Code.Foul,action.team,EventType)">
-      <span>Cancel</span>
-    </div>
-    <div class="undo-event" ng-click="undoEvent(Code.Foul,action.team, lastSentEventId)">
-      <span>Send</span>
-    </div>
-  </div>
-  <div class="close-area" ng-click="closeArea()"></div>
+  <div class="close_area" ng-click="closeArea()"></div>
 </div>

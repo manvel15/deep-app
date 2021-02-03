@@ -1,38 +1,38 @@
-<div class="select-possession-wrapper">
+<div class="select_possession_wrapper">
   <h6 class="">Select Ball Possession</h6>
-  <div class="arrow-wrapper-big">
+  <div class="arrow_wrapper_big">
     <div
-      class="arrow-left-big"
+      class="arrow_left_big"
       ng-click="event(Code.BallPossession,Team.Home, true, 1);event(Code.MatchStart)"
       ng-class="{'order-last' : isTeamsSwapped}"
     ></div>
 
     <div
-      class="arrow-right-big"
+      class="arrow_right_big"
       ng-click="event(Code.BallPossession,Team.Away, true, 2);event(Code.MatchStart)"
       ng-class="{'order-first' : isTeamsSwapped}"
     ></div>
   </div>
-  <div class="event-detail-wrapper">
-    <div class="event-detail-players">
+  <div class="event_detail_wrapper">
+    <div class="event_detail_players">
       <div>
         <h3>{{team[1]}} Player</h3>
-        <div class="starting-players confirm-wrapper">
+        <div class="starting_players">
           <label ng-repeat="p in action.team == 1 ? playersAway.starting : playersHome.starting">
             <input type="radio" name="assistant" ng-click="setEventDetail($event, 'jumpBall_home_id', p)" />
-            <div class="team-player">
+            <div class="team_player">
               <span>{{playersShirtNumber[p]}}</span>
             </div>
           </label>
         </div>
       </div>
-      <div class="wall-players"></div>
+      <div class="wall_players"></div>
       <div>
         <h3>{{team[2]}} Player</h3>
-        <div class="starting-players confirm-wrapper">
+        <div class="starting_players">
           <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
             <input type="radio" name="player" ng-click="setEventDetail($event, 'jumpBall_away_id', p)" />
-            <div class="team-player">
+            <div class="team_player">
               <span>{{playersShirtNumber[p]}}</span>
             </div>
           </label>

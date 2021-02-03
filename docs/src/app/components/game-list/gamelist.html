@@ -249,7 +249,13 @@
                             <i class="bc-icon-description" ng-if="!(game.status == 0 || game.status == 1)"></i>
                           </div>
                           <div class="match-r-btn-d">
-                            <button class="btn-start" ng-class="'btn-start ' + (game.status == 11 ? 'disabled' :'')" ng-click="vm.startGame(game)">start</button>
+                            <button
+                              class="btn-start"
+                              ng-class="'btn-start ' + (game.status == 11 ? 'disabled' :'')"
+                              ng-click="vm.startGame(game)"
+                            >
+                              start
+                            </button>
                           </div>
                         </div>
                       </div>

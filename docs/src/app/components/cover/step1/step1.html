@@ -10,6 +10,7 @@
             ng-model="venueAndStaff.venue.selectedValue"
             ng-focus="choseGameStaff($event)"
             ng-blur="choseGameStaff($event)"
+            autocomplete="off"
             ng-change="change('venue')"
           />
           <label class="venue-lab">Venue</label>
@@ -24,7 +25,11 @@
                   >
                     {{venue.name}}
                   </p>
-                  <div class="d-add-coach" ng-if="!preGameData.venue.length && venueAndStaff.venue.setCustomValue" ng-click="addOption('venue')">
+                  <div
+                    class="d-add-coach"
+                    ng-if="!preGameData.venue.length && venueAndStaff.venue.setCustomValue"
+                    ng-click="addOption('venue')"
+                  >
                     <p class="p-add-coach-left">Add</p>
                     <p class="p-add-coach-right">'{{venueAndStaff.venue.setCustomValue}}'</p>
                   </div>
@@ -46,6 +51,7 @@
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
                 ng-change="change('referee')"
+                autocomplete="off"
               />
               <label class="venue-lab">Referee</label>
               <div class="open-ven-wr" ng-if="preGameData.referee.length || venueAndStaff.referee.setCustomValue">
@@ -114,6 +120,7 @@
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
                 ng-change="change('umpire1')"
+                autocomplete="off"
               />
               <label class="venue-lab">Umpire 1</label>
               <div class="open-ven-wr" ng-if="preGameData.umpire1.length || venueAndStaff.umpire1.setCustomValue">
@@ -184,6 +191,7 @@
                 ng-model="preGameData.game.period_count"
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
+                autocomplete="off"
               />
               <label class="venue-lab">Count</label>
             </div>
@@ -198,6 +206,7 @@
                 ng-model="preGameData.game.period_duration"
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
+                autocomplete="off"
               />
               <label class="venue-lab">Length</label>
             </div>
@@ -212,6 +221,7 @@
                 ng-model="preGameData.game.overtime_length"
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
+                autocomplete="off"
               />
               <label class="venue-lab">Overtime</label>
             </div>
@@ -229,6 +239,7 @@
                 ng-model="venueAndStaff.commissioner.selectedValue"
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
+                autocomplete="off"
                 ng-change="change('commissioner')"
               />
               <label class="venue-lab">Commissioner</label>
@@ -302,6 +313,7 @@
                 ng-focus="choseGameStaff($event)"
                 ng-blur="choseGameStaff($event)"
                 ng-change="change('umpire2')"
+                autocomplete="off"
               />
               <label class="venue-lab">Umpire 2</label>
               <div class="open-ven-wr" ng-if="preGameData.umpire2.length || venueAndStaff.umpire2.setCustomValue">

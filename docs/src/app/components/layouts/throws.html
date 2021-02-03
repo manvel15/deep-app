@@ -1,116 +1,126 @@
-<div class="event-detail-wrapper" ng-class="{'disabled': isTimeOut}">
-  <div class="event-detail-left">
-    <div class="event-type-wrapper confirm-wrapper">
-      <div class="scroll-content event-type-center">
-        <div class="title-player">
-          <h1>Free Throws</h1>
-          <h1>{{team[action.team]}}</h1>
-          <h2>Count {{throwsCounter() || 0}}</h2>
-          <h2>Player Number {{playersShirtNumber[fouledPlayer || playerId]}}</h2>
-          <!--<h3>Player Number {{playersShirtNumber[freeThrowAssistant]}}</h3>-->
+<div class="event_detail_wrapper" ng-class="{'disabled': isTimeOut}">
+  <div class="event_type_wrapper">
+    <h2>Free Throws {{team[action.team]}}</h2>
+    <h3>Count {{throwsCounter() || 0}}</h3>
+    <h3>Player Number {{playersShirtNumber[fouledPlayer || playerId]}}</h3>
+    <!--<h3>Player Number {{playersShirtNumber[freeThrowAssistant]}}</h3>-->
+    <label>
+      <span
+        class="event_type scored throw"
+        ng-class="{'disabled': action.enabledContinueButton}"
+        ng-click="event(Code.OnePoint, action.team)"
+        >Scored</span
+      >
+    </label>
+    <label>
+      <span
+        class="event_type missed throw"
+        ng-class="{'disabled': action.enabledContinueButton}"
+        ng-click="event(Code.FreeThrowMissed, action.team)"
+        >Missed</span
+      >
+    </label>
+    <label
+      ng-click="retake()"
+      ng-class="{'disabled': !action.disabledButtons}"
+      ng-show="action.throwsCount || action.code"
+    >
+      <span class="event_type retake">Retake</span>
+    </label>
+    <label
+      ng-click="undoEvent(Code.FreeThrows, action.team, action.sEventId)"
+      ng-show="!action.throwsCount && !action.code"
+    >
+      <span class="event_type undo">Undo Free Throw</span>
+    </label>
+    <div class="event_detail_players">
+      <div ng-class="{'disabled': action.enabledContinueButton}">
+        <h3>Select Player</h3>
+        <div class="starting_players">
+          <label ng-repeat="pl in action.team == 1 ? playersHome.starting : playersAway.starting">
+            <input
+              type="radio"
+              name="player"
+              ng-click="setEventDetail($event, 'player_id', pl);getCheck(pl)"
+              ng-checked="pl === fouledPlayer"
+            />
+            <div class="team_player">
+              <span>{{playersShirtNumber[pl]}}</span>
+            </div>
+          </label>
         </div>
-        <div class="smr-wr">
-          <label class="scored">
-            <span class="event-type throw" ng-class="{'disabled': action.enabledContinueButton}" ng-click="event(Code.OnePoint, action.team)">Scored</span>
-          </label>
-          <label class="missed">
-            <span class="event-type throw" ng-class="{'disabled': action.enabledContinueButton}" ng-click="event(Code.FreeThrowMissed, action.team)">Missed</span>
-          </label>
-          <label class="retake" ng-click="retake()" ng-class="{'disabled': !action.disabledButtons}" ng-show="action.throwsCount || action.code">
-            <span class="event-type">Retake</span>
-          </label>
-          <label class="undo" ng-click="undoEvent(Code.FreeThrows, action.team, action.sEventId)" ng-show="!action.throwsCount && !action.code">
-            <span class="event-type">Undo Free Throw</span>
+      </div>
+      <div class="wall_players"></div>
+      <div ng-class="{'disabled': action.enabledContinueButton}">
+        <h3>Select Assistant</h3>
+        <div class="starting_players">
+          <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
+            <input
+              type="radio"
+              name="assistant"
+              ng-click="setEventDetail($event, 'assistant_id', p)"
+              ng-if="p !== fouledPlayer"
+            />
+            <div class="team_player" ng-class="{'disabled' : p === fouledPlayer}">
+              <span>{{playersShirtNumber[p]}}</span>
+            </div>
           </label>
         </div>
       </div>
     </div>
   </div>
-  <div class="event-detail-right">
-    <div class="scroll-content">
-      <div class="event-detail-players">
-        <div ng-class="{'disabled': action.enabledContinueButton}">
-          <h3>Select Player</h3>
-          <div class="starting-players confirm-wrapper">
-            <label ng-repeat="pl in action.team == 1 ? playersHome.starting : playersAway.starting">
-              <input
-                      type="radio"
-                      name="player"
-                      ng-click="setEventDetail($event, 'player_id', pl);getCheck(pl)"
-                      ng-checked="pl === fouledPlayer"
-              />
-              <div class="team-player">
-                <span>{{playersShirtNumber[pl]}}</span>
-              </div>
-            </label>
-          </div>
-        </div>
-        <div ng-class="{'disabled': action.enabledContinueButton}">
-          <h3>Select Assistant</h3>
-          <div class="starting-players confirm-wrapper">
-            <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
-              <input
-                      type="radio"
-                      name="assistant"
-                      ng-click="setEventDetail($event, 'assistant_id', p)"
-                      ng-if="p !== fouledPlayer"
-              />
-              <div class="team-player" ng-class="{'disabled' : p === fouledPlayer}">
-                <span>{{playersShirtNumber[p]}}</span>
-              </div>
-            </label>
-          </div>
-        </div>
-      </div>
-      <div class="fensive">
-        <div class="confirm-wrapper">
-          <label>
-            <input type="radio" name="rebound" ng-click="action.rebound_type = 'Offensive'" />
-            <span ng-click="action.reboundTeam = Team.Home" class="event-type">Offensive</span>
-          </label>
-          <label>
-            <input type="radio" name="rebound" ng-click="action.rebound_type = 'Defensive'" />
-            <span ng-click="action.reboundTeam = Team.Away" class="event-type">Defensive</span>
-          </label>
-        </div>
-      </div>
-      <div class="event-detail-players">
-        <h3 class="fastBreakPoint" ng-click="fastBr()">Fastbreakpoint</h3>
-        <label class="fast-point" ng-click="fastBr()">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-        </label>
-      </div>
-      <div class="event-detail-players" ng-show="action.showReboutArea">
+  <h3 class="fastBreakPoint" ng-click="fastBr()">
+    Fastbreakpoint
+    <input type="checkbox" ng-model="fastBreakPoint" />
+  </h3>
+  <div ng-show="action.showReboutArea" class="event_types">
+    <div class="ng-scope">
+      <label>
+        <input type="radio" name="rebound" ng-click="action.rebound_type = 'Offensive'" />
+        <span ng-click="action.reboundTeam = Team.Home" class="event_type">Offensive</span>
+      </label>
+    </div>
+    <div class="ng-scope">
+      <label>
+        <input type="radio" name="rebound" ng-click="action.rebound_type = 'Defensive'" />
+        <span ng-click="action.reboundTeam = Team.Away" class="event_type">Defensive</span>
+      </label>
+    </div>
+  </div>
+  <div class="event_detail_players" ng-show="action.showReboutArea">
+    <div>
+      <h3 class="">Select Next Event</h3>
+      <div class="event_types">
         <div>
-          <h3 class="">Select Next Event</h3>
-            <div>
-              <h3>Offensive</h3>
-              <div class="starting-players confirm-wrapper">
-                <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
-                  <input type="radio" name="rebound" ng-click="setEventDetail($event, 'rebound_player_id', p)" />
-                  <div class="team-player">
-                    <span ng-click="setEventDetail($event, 'rebound_type', 'Offensive')">{{playersShirtNumber[p]}}</span>
-                  </div>
-                </label>
+          <h3>Offensive</h3>
+          <div class="starting_players">
+            <label ng-repeat="p in action.team == 1 ? playersHome.starting : playersAway.starting">
+              <input type="radio" name="rebound" ng-click="setEventDetail($event, 'rebound_player_id', p)" />
+              <div class="team_player">
+                <span ng-click="setEventDetail($event, 'rebound_type', 'Offensive')">{{playersShirtNumber[p]}}</span>
               </div>
-            </div>
-            <div>
-              <h3>Defensive</h3>
-              <div class="starting-players confirm-wrapper">
-                <label ng-repeat="p in action.team == 1 ? playersAway.starting : playersHome.starting">
-                  <input type="radio" name="rebound" ng-click="setEventDetail($event, 'rebound_player_id', p)" />
-                  <div class="team-player">
-                    <span ng-click="setEventDetail($event, 'rebound_type', 'Defensive')">{{playersShirtNumber[p]}}</span>
-                  </div>
-                </label>
-              </div>
-            </div>
+            </label>
+          </div>
         </div>
-      </div>
-      <div class="event-detail-continue" ng-click="confirmThrow()" ng-class="{'disabled': !action.enabledContinueButton}">
-        <span>Continue</span>
+        <div>
+          <h3>Defensive</h3>
+          <div class="starting_players">
+            <label ng-repeat="p in action.team == 1 ? playersAway.starting : playersHome.starting">
+              <input type="radio" name="rebound" ng-click="setEventDetail($event, 'rebound_player_id', p)" />
+              <div class="team_player">
+                <span ng-click="setEventDetail($event, 'rebound_type', 'Defensive')">{{playersShirtNumber[p]}}</span>
+              </div>
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <div class="event_detail_send" ng-click="confirmThrow()" ng-class="{'disabled': !action.enabledContinueButton}">
+    <span>Continue</span>
+  </div>
+
+  <!--<label ng-click="confirmThrow('continue')" ng-class="{'disabled': !action.disabledButtons}">-->
+  <!--<span class="event_type">Continue</span>-->
+  <!--</label>-->
 </div>

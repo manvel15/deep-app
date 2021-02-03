@@ -112,7 +112,7 @@
       <div class="scrollable-container">
         <div class="for-add-container">
           <p class="popup-team-name">{{vm.selectedTeam.team_name}}</p>
-          <form form-validation-directive="vm.addOrEditPlayer()" novalidate>
+          <form form-validation-directive="addOrEditPlayer" novalidate>
             <div class="for-add-item">
               <div class="inside-for-add-item">
                 <input class="add-item" placeholder="First Name" name="first_name" ng-model="vm.userModel.first_name" />

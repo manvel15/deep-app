@@ -45,6 +45,7 @@
                 ng-model="coach.homeCoach.selectedValue"
                 ng-focus="choseCoach($event)"
                 ng-blur="choseCoach($event)"
+                autocomplete="off"
                 ng-change="change('homeCoach')"
               />
               <label class="venue-lab">Coach Name</label>
@@ -59,7 +60,11 @@
                       >
                         {{item.name}}
                       </p>
-                      <div class="d-add-coach" ng-if="!preGameData.homeCoach.length && coach.homeCoach.setCustomValue" ng-click="addOption('homeCoach')">
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.homeCoach.length && coach.homeCoach.setCustomValue"
+                        ng-click="addOption('homeCoach')"
+                      >
                         <p class="p-add-coach-left">Add</p>
                         <p class="p-add-coach-right">'{{coach.homeCoach.setCustomValue}}'</p>
                       </div>
@@ -110,6 +115,7 @@
                 ng-focus="choseCoach($event)"
                 ng-blur="choseCoach($event)"
                 ng-change="change('homeAssistant')"
+                autocomplete="off"
               />
               <label class="venue-lab">Associated Coach</label>
               <div class="open-ven-wr" ng-if="preGameData.homeAssistant.length || coach.homeAssistant.setCustomValue">
@@ -213,6 +219,7 @@
                 ng-model="coach.awayCoach.selectedValue"
                 ng-focus="choseCoach($event)"
                 ng-blur="choseCoach($event)"
+                autocomplete="off"
                 ng-change="change('awayCoach')"
               />
               <label class="venue-lab">Coach Name</label>
@@ -227,7 +234,11 @@
                       >
                         {{item.name}}
                       </p>
-                      <div class="d-add-coach" ng-if="!preGameData.awayCoach.length && coach.awayCoach.setCustomValue" ng-click="addOption('awayCoach')">
+                      <div
+                        class="d-add-coach"
+                        ng-if="!preGameData.awayCoach.length && coach.awayCoach.setCustomValue"
+                        ng-click="addOption('awayCoach')"
+                      >
                         <p class="p-add-coach-left">Add</p>
                         <p class="p-add-coach-right">'{{coach.awayCoach.setCustomValue}}'</p>
                       </div>
@@ -278,6 +289,7 @@
                 ng-focus="choseCoach($event)"
                 ng-blur="choseCoach($event)"
                 ng-change="change('awayAssistant')"
+                autocomplete="off"
               />
               <label class="venue-lab">Associated Coach</label>
               <div class="open-ven-wr" ng-if="preGameData.awayAssistant.length || coach.awayAssistant.setCustomValue">
