@@ -1,0 +1,130 @@
+@mixin width($value) {
+    width: #{$value+'%'};
+}
+
+@for $i from 0 through 100 {
+    .width-#{$i} {
+        @include width($i);
+    }
+}
+
+@mixin left($value) {
+    left: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .left-#{$i} {
+        @include left($i);
+    }
+}
+
+@media screen and (max-width: 904px) {
+    .dashboard-sidebar {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 1100px) {
+    .dashboard-sidebar {
+        display: none;
+    }
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+I {
+    cursor: pointer;
+}
+
+//margin form 0 to 100px
+@mixin margin-left($value) {
+    margin-left: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .margin-left-#{$i} {
+        @include margin-left($i);
+    }
+}
+
+@mixin margin-right($value) {
+    margin-right: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .margin-right-#{$i} {
+        @include margin-right($i);
+    }
+}
+
+@mixin margin-top($value) {
+    margin-top: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .margin-top-#{$i} {
+        @include margin-top($i);
+    }
+}
+
+@mixin margin-bottom($value) {
+    margin-bottom: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .margin-bottom-#{$i} {
+        @include margin-bottom($i);
+    }
+}
+//----------------------------------
+
+//padding from 0 to 100px
+@mixin padding-left($value) {
+    padding-left: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .padding-left-#{$i} {
+        @include padding-left($i);
+    }
+}
+
+@mixin padding-right($value) {
+    padding-right: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .padding-right-#{$i} {
+        @include padding-right($i);
+    }
+}
+
+@mixin padding-top($value) {
+    padding-top: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .padding-top-#{$i} {
+        @include padding-top($i);
+    }
+}
+
+@mixin padding-bottom($value) {
+    padding-bottom: #{$value + px};
+}
+
+@for $i from 0 through 100 {
+    .padding-bottom-#{$i} {
+        @include padding-bottom($i);
+    }
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+//-----------------------------------
